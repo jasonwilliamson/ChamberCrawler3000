@@ -1,10 +1,18 @@
 #include <iostream>
 #include <fstream>
 #include "game.h"
+#include "item.h"
 
 using namespace std;
 
 Game::Game() {
+    map_file = "../res/map-default";
+    floor = new Floor();
+    display = new Display();
+}
+
+Game::Game(char* custom_map) {
+    map_file = custom_map;
     floor = new Floor();
     display = new Display();
 }
@@ -19,8 +27,16 @@ void Game::update() {
 }
 
 void Game::init() {
+    generateLayout();
+    generatePlayerLocation();
+    generateEnemies();
+    generatePotions();
+    generateGold();
+}
+
+void Game::generateLayout() {
     ifstream ifs;
-    ifs.open("../res/map-layout");
+    ifs.open(map_file.c_str());
     if (ifs.is_open()) {
         char c;
         ifs >> noskipws;
@@ -36,4 +52,18 @@ void Game::init() {
         }
     }
     ifs.close();
+}
+
+void Game::generatePlayerLocation() {
+}
+
+void Game::generateEnemies() {
+}
+
+void Game::generatePotions() {
+    
+}
+
+void Game::generateGold() {
+
 }
