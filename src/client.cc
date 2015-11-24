@@ -1,4 +1,6 @@
 #include <iostream>
+#include "game.h"
+#include "display.h"
 
 using namespace std;
 
@@ -27,6 +29,7 @@ int direction(char c1, char c2) {
 
 int main(int argc, char* argv[]) {
     char command;
+    Game *game;
     cout << "Welcome to ChamberCrawler 3000!" << endl;
     cout << "Enter a race to begin or q to quit: ";
 
@@ -34,7 +37,9 @@ int main(int argc, char* argv[]) {
         if (command == 'q') {
             break;
         } else if (command == 'r') {
-            //restart game;
+            game = new Game();
+            game->init();
+            game->update();
         } else if (command == 's') {
             //shade
         } else if (command == 'd') {
