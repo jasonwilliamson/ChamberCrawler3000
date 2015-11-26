@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS =  -Wall -g -MMD
 EXEC = cc3k
-OBJECTS = client.o game.o display.o floor.o
+OBJECTS = client.o 
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
