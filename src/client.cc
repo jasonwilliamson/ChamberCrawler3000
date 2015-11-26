@@ -3,12 +3,12 @@
 #include <fstream>
 #include <cstdlib>
 #include "constants.h"
+#include "controller.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]) {
-    // Requires Controller implementation 
-    //Controller *controller;
+    Controller *controller;
     char filegrid[HEIGHT][WIDTH];
     bool customfile = false;
     if (argc % 2 == 0) {
@@ -57,17 +57,10 @@ int main(int argc, char* argv[]) {
         }
     }
     
-    //Remove after Controller implementation. 
-    //Bypasses unused variable flag
-    filegrid[0][0] = filegrid[0][0];
-
     if (customfile) {
-        // Requires Controller implementation
-        //controller = new Controller(filegrid);
+        controller = new Controller(filegrid);
     } else {
-        // Again, requires Controller implementation 
-        //controller = new Controller();
+        controller = new Controller();
     }
-    // Once Controller implementation is complete, this will start the game
-    //controller.play();
+    controller->play();
 }

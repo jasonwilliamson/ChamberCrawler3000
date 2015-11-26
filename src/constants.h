@@ -4,4 +4,14 @@
 const int WIDTH = 79;
 const int HEIGHT = 25;
 
+const int MOVE = 0;
+const int USE = 1;
+const int ATTACK = 2;
+
+const int SHADE = 0;
+const int DROW = 1;
+const int VAMPIRE = 2;
+const int GOBLIN = 3;
+const int TROLL = 4;
+
 #endif
