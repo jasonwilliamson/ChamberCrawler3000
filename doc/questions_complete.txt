@@ -16,8 +16,15 @@ How could you implement the various abilities for the enemy characters? Do you u
 
 The Decorator and Strategy patterns are possible candidates to model the effects of potions so that we do not need to explicitly track which potions the player character has consumed on any particular floor? In your opinion, which pattern would work better? Explain in detail, by weighing the advantages/dis- advantages of the two patterns. 
 
+	We claim that Decorator Pattern would work best to model the effects of potions, as the pattern provides an elegant way to wrap a core component, in this case the player character, with one or more decorators that modify the core component slightly. This makes adding additional decorators very easy, simply by adding a new concrete decorator we have extended the pattern. Using the concrete decorators to decorate a component only requires knowledge of the concrete decorator class name, everything else is abstracted. 
+
+	The Strategy Pattern enables us to define a family of algorithms and make each one interchangeable. Although this pattern could be configured to work for this problem, the idea of effects of a potion on a player is better mimicked by Decorator Pattern. 
+
 
 How could you generate items so that the generation of Treasure and Potions reuses as much code as possible? That is, how would you structure your system so that the generation of a potion and then generation of treasure does not duplicate code? 
+
+	Game items that include potions and gold in our game will be spawned through a Factory Pattern, this is a level specific pattern. As mentioned before this makes adding new potions and treasure an easy task. That being said potions and gold differ from characters, as they are representations of values. For this reason the potion and gold classes will be instantiated with a type value, all potion and gold type specifics will be defined based on this type value. In this way we are not duplicating any code for each item, also, adding an extension (an extra gold, or potion type) would require only a small change in potion or golds respective class.
+
 
 
 
