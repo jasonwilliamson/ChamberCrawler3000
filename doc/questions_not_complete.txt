@@ -1,0 +1,24 @@
+How could your design your system so that each race could be easily generated? Additionally, how difficult does such a solution make adding additional races? 
+
+	In our system each race will be spawned with use of a Factory Pattern, this abstracts any knowledge of Character’s race away from the client. To invoke creation of each the races We create an abstract Level Class that is a superclass to any concrete level implementation. 
+
+	This makes adding new a race simple. If races are added to either one of the Enemy or Player character hierarchy we only have to make a small change in our concrete Level class.
+
+How does your system handle generating different enemies? Is it different from how you generate the player character? Why or why not? 
+
+	Generation of enemies and the player character are handled different. As it is necessary to spawn many enemies in a level (20, not including Dragons) we must also consider there random placement in each chamber (with equal probability), and each tile in the chamber must have an equal probability for an enemy to be spawned there as well.  Not to mention that player character’s race is chosen by the user before hand, in contrast to enemies race that is randomized based on probability between the races.
+
+	For these reasons our system must handle enemy generation separate from player. Creating 20 twenty randomized enemy races in bulk will be handled by our Factory Pattern. However, our player character does get created by the Factory Pattern as well, but for the aforementioned reasons these two character’s generation specifics must differ.
+
+How could you implement the various abilities for the enemy characters? Do you use the same techniques as for the player character races? Explain. 
+
+	Using the Template Method Pattern we can override the behaviour of our super class Enemy, but all of the behaviour. In this way we can re-define certain steps or various specific abilities without changing the Enemy class structure. Enemy provides some abstract operation that subclasses can override to provide concrete behaviour. We do use the same techniques for the Player character races as well. Both Player and Enemy represent superclasses that will present abstract classes for subclasses (different races) to provide race specific behaviour for. 
+
+The Decorator and Strategy patterns are possible candidates to model the effects of potions so that we do not need to explicitly track which potions the player character has consumed on any particular floor? In your opinion, which pattern would work better? Explain in detail, by weighing the advantages/dis- advantages of the two patterns. 
+
+
+How could you generate items so that the generation of Treasure and Potions reuses as much code as possible? That is, how would you structure your system so that the generation of a potion and then generation of treasure does not duplicate code? 
+
+
+
+
