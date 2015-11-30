@@ -19,7 +19,7 @@ protected:
     int def;
     
 public:
-    Character();
+//    Character();
     Character(int hp, int atk, int def);
     virtual ~Character();
     void setHP(int);

@@ -14,8 +14,8 @@
 
 class Level{
 public:
-    ~Level();
-    virtual Player* createPlayer(char);
+    virtual ~Level();
+    //virtual Player* createPlayer(char);
 };
 
 #endif /* level_hpp */

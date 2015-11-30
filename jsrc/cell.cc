@@ -8,3 +8,15 @@
 //
 
 #include "cell.h"
+#include <cstdlib>
+
+//Cell::Cell():row(0), column(0), defaultChar(' '), gameObjectChar(' '){}
+
+Cell::Cell(int row, int column, char defaultChar):
+    row(row), column(column), defaultChar(defaultChar), gameObjectChar(' '), gameObj(NULL){}
+
+//Cell::Cell(int row, int column, char defaultChar, char gameObjectChar):
+//    row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar){}
+
+Cell::Cell(int row, int column, char defaultChar, char gameObjectChar, GameObject* gameObj):
+    row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar), gameObj(gameObj){}

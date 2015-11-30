@@ -11,7 +11,7 @@
 
 class CharBoard {
 private:
-    char **board;
+    
     int rows;
     int columns;
     
@@ -19,6 +19,10 @@ public:
     CharBoard();
     CharBoard(int rows, int columns);
     ~CharBoard();
+    char **board;
+    int getRows();
+    int getColumns();
+    //char& operator[](const int nIndex);
 };
 
 #endif /* charboard_hpp */

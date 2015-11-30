@@ -12,8 +12,11 @@
 #include "player.h"
 #include "booster.h"
 
-Player::Player(){
-    //this->activePotions = new Booster();
+Player::Player(int hp, int atk, int def):Character(hp, atk, def){
+    this->activePotions = new Booster();
 }
 
-Player::~Player(){}
+Player::~Player(){
+    delete this->activePotions;
+}
+

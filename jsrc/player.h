@@ -12,13 +12,20 @@
 
 #include "character.h"
 #include "booster.h"
+#include "item.h"
 
 class Player :public Character{
-private:
-    //Booster activePotions;
+protected:
+    Booster *activePotions;
 public:
-    Player();
+    Player(int hp, int atk, int def);
     virtual ~Player();
+    virtual void move(char dir);
+    virtual void use(Item *);
+    virtual void setHp(int);
+    virtual int getHp();
+    virtual int getAtk();
+    virtual int getDef();
 };
 
 #endif 
