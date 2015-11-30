@@ -12,15 +12,15 @@
 #include "item.h"
 #include "player.h"
 
-class Potion: public Item{
-public:
+class Potion : public Item {
+  private:
+    int potionType;
+  public:
     Potion(char val, int potionType);
     ~Potion();
     void use(Player& player);
     void setType(int potionType);
     int getType();
-private:
-    int potionType;
 };
 
 #endif /* potion_hpp */

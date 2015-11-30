@@ -66,10 +66,10 @@ void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WI
             }else if (value == '0' || value == '1' || value == '2' ||
                       value == '3' || value == '4' || value == '5'){
                 int num = value - '0';
-                cellGrid[i][j]->setGameObject(value, initPotion(value, num));
+                cellGrid[i][j]->setGameObject('P', initPotion(value, num));
             }else if (value == '6'|| value == '7' || value == '8' || value == '9'){
                 int num = value - '0';
-                cellGrid[i][j]->setGameObject(value, initTreasure(value, num));
+                cellGrid[i][j]->setGameObject('G', initTreasure(value, num));
             }else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
                       value == 'M' || value == 'D' || value == 'L'){
                 cellGrid[i][j]->setGameObject(value, initEnemy(value));

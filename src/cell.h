@@ -14,11 +14,11 @@
 
 class Cell{
 private:
-    GameObject *gameObj;
     int row;
     int column;
     char defaultChar;
     char gameObjectChar;
+    GameObject *gameObj;
     
 public:
     Cell(int row, int column);
