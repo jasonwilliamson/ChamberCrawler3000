@@ -1,16 +1,26 @@
-#ifndef POTION_H
-#define POTION_H
-#include "gameobject.h"
+//
+//  potion.hpp
+//  loadingFromFile
+//
+//  Created by Jason Williamson on 2015-11-29.
+//  Copyright © 2015 Jason Williamson. All rights reserved.
+//
 
-class Potion : public GameObject {
-  private:
-    //potion types;
+#ifndef potion_hpp
+#define potion_hpp
 
-  public:
-    Potion();
-    virtual ~Potion();
+#include "item.h"
+#include "player.h"
 
-    bool use();
+class Potion: public Item{
+public:
+    Potion(char val, int potionType);
+    ~Potion();
+    void use(Player& player);
+    void setType(int potionType);
+    int getType();
+private:
+    int potionType;
 };
 
-#endif
+#endif /* potion_hpp */

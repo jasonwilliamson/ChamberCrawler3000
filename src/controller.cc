@@ -131,7 +131,7 @@ void Controller::play() {
 void Controller::updateDisplay() {
     for (int r = 0; r < HEIGHT; r++) {
         for (int c = 0; c < WIDTH; c++) {
-            display->updateMap(r, c, game->getCell(r, c)->getDisplayChar());
+            display->updateMap(r, c, game->getCell(r, c)->getCellChar());
         }
     }
     //display->updateCharacter(game->getPlayer()->getRace(),

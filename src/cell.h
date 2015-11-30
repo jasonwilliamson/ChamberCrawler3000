@@ -1,26 +1,46 @@
-#ifndef CELL_H
-#define CELL_H
-#include <iostream>
+// ====================================================
+// Jason Williamson (20552360)
+// David Inglis
+// CS 246 Fall 2015
+// Assignment 05, CC3K
+// File: cell.h
+// ====================================================
+//
+
+#ifndef cell_hpp
+#define cell_hpp
+
 #include "gameobject.h"
 
-
-class Cell {
-  private:
+class Cell{
+private:
+    GameObject *gameObj;
     int row;
-    int col;
-    GameObject* gameObject;
-
-  public:
-    Cell(int row, int col);
-    Cell(int row, int col, GameObject* go);
+    int column;
+    char defaultChar;
+    char gameObjectChar;
+    
+public:
+    //Cell();
+    //Cell(int row, int column, char defualtChar);
+    //Cell(int row, int column, char defaultChar, char gameObjectChar);
+    Cell(int row, int column, char defaultChar);
+    Cell(int row, int column, char defaultChar, char gameObjectChar, GameObject* gameObj);
     ~Cell();
-
-    void setGameObject(GameObject* go);
-    void setCoordinates(int row, int col);
+    char getDefaultChar();
+    void setDefaultChar(char);
+    char getGameObjectChar();
+    void setGameObjectChar(char);
+    void setGameObject(GameObject *);
+    int getGameObject();
     int getRow();
     int getColumn();
-    GameObject* getGameObject();
-    char getDisplayChar();
+    void setRow(int);
+    void setColumn(int);
+    //void determineNeighbours()
+    //notify neighboursOfPlayer
+    //notify neighboursOfEnemy
+    //notify neightboursOfDragonGold..or something
 };
 
-#endif
+#endif /* cell_hpp */

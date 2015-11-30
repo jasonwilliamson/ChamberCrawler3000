@@ -1,34 +1,31 @@
+// ====================================================
+// Jason Williamson (20552360)
+// David Inglis
+// CS 246 Fall 2015
+// Assignment 05, CC3K
+// File: cell.cc
+// ====================================================
+//
+
 #include "cell.h"
+#include <cstdlib>
 
-Cell::Cell(int row, int col)
-    :row(row), col(col), gameObject(NULL) {}
+//Cell::Cell():row(0), column(0), defaultChar(' '), gameObjectChar(' '){}
 
-Cell::Cell(int row, int col, GameObject *go)
-    :row(row), col(col), gameObject(go) {}
+Cell::Cell(int row, int column, char defaultChar)
+    :row(row), column(column), defaultChar(defaultChar), gameObjectChar(' '), gameObj(NULL ) {}
 
-Cell::~Cell() {
-    delete gameObject;
-}
+//Cell::Cell(int row, int column, char defaultChar, char gameObjectChar):
+//    row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar){}
 
-void Cell::setGameObject(GameObject* go) {
-    gameObject = go;
-}
+Cell::Cell(int row, int column, char defaultChar, char gameObjectChar, GameObject* gameObj)
+    :row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar), gameObj(gameObj){}
 
-void Cell::setCoordinates(int row, int col) {
-    this->row = row;
-    this->col = col;
-}
 
-int Cell::getRow() { return row; }
-
-int Cell::getColumn() { return col; }
-
-GameObject* Cell::getGameObject() { return gameObject; }
-
-char Cell::getDisplayChar() {
-    if (gameObject) {
-        return gameObject->getDisplayChar();
+char Cell::getCellChar() {
+    if(gameObj) {
+        return gameObjectChar;
     } else {
-        return 'n';
+        return defaultChar;
     }
 }

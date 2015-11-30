@@ -1,21 +1,21 @@
-#ifndef LEVEL_H
-#define LEVEL_H
-#include <cstdlib>
-#include "gameobject.h"
-#include "cell.h"
-#include "constants.h"
+// ====================================================
+// Jason Williamson (20552360)
+// David Inglis
+// CS 246 Fall 2015
+// Assignment 05, CC3K
+// File: level.h
+// ====================================================
+//
+
+#ifndef level_hpp
+#define level_hpp
+
 #include "player.h"
-#include "enemy.h"
-#include "potion.h"
-#include "gold.h"
 
-class Level {
-  public:
-    Level();
-    ~Level();
-
-    void generate(Cell* cells[HEIGHT][WIDTH]);
-    void generate(Cell* cells[HEIGHT][WIDTH], char data[HEIGHT][WIDTH]);
+class Level{
+public:
+    virtual ~Level();
+    //virtual Player* createPlayer(char);
 };
 
-#endif
+#endif /* level_hpp */
