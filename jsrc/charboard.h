@@ -11,14 +11,19 @@
 
 class CharBoard {
 private:
-    char **board;
+    
     int rows;
     int columns;
     
 public:
     CharBoard();
-    CharBoard(int rows, int columns);
+    //CharBoard(int rows, int columns, char **board);
+    CharBoard(int rows, int columns, char board[HEIGHT][WIDTH]);
     ~CharBoard();
+    char **board;
+    int getRows();
+    int getColumns();
+    //char& operator[](const int nIndex);
 };
 
 #endif /* charboard_hpp */

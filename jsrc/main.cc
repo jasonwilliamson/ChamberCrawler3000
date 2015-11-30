@@ -17,6 +17,7 @@ int main(int argc, const char * argv[]) {
     Controller *controller;
     string cmd;
     char fileGrid[HEIGHT][WIDTH];
+    //char **fileGrid;
     while (cin >> cmd) {
         
         if (cmd == "include") {
@@ -46,6 +47,6 @@ int main(int argc, const char * argv[]) {
         }
     }
     cout << "calling new controller" << endl;
-    controller = new Controller(fileGrid);
+    controller = new Controller(fileGrid[HEIGHT][WIDTH]);
     //controller->play();
 }

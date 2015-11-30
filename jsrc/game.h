@@ -2,6 +2,7 @@
 #define GAME_H
 #include "constants.h"
 #include "charboard.h"
+#include "floor.h"
 
 class Game {
     //Player* player;   
@@ -10,6 +11,7 @@ class Game {
     int gamestate;
     CharBoard *boardsArray;
     int currentLevel;
+    Floor* floor;
     //char **board;
     
     
@@ -17,6 +19,7 @@ class Game {
   public:
     Game();
     Game(char filemap[HEIGHT][WIDTH]);
+    //Game(char **filemap);
     Game(CharBoard *boardsArray);
     ~Game();
     void initLevel();

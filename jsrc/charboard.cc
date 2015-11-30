@@ -10,6 +10,21 @@
 
 CharBoard::CharBoard():rows(HEIGHT), columns(WIDTH){}
 
-CharBoard::CharBoard(int rows, int columns):rows(rows), columns(columns){}
+//CharBoard::CharBoard(int rows, int columns, char **board):rows(rows), columns(columns),board(board){}
+CharBoard(int rows, int columns, char board[HEIGHT][WIDTH]):rows(rows), columns(columns),
+    board(board[HEIGHT][WIDTH]){}
 
 CharBoard::~CharBoard(){}
+
+int CharBoard::getRows(){
+    return this->rows;
+}
+
+int CharBoard::getColumns(){
+    return this->columns;
+}
+
+
+//char& CharBoard::operator[](const int nIndex){
+//    return *board[nIndex];
+//}
