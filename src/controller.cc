@@ -5,18 +5,18 @@ using namespace std;
 
 Controller::Controller() {
     game = new Game();
-
-    //TESTING
-    cout << "A new Game was created" << endl;
+    display = new Display();
 }
 
-Controller::Controller(char filegrid[HEIGHT][WIDTH]) {
+Controller::Controller(char filegrid[HEIGHT * 5][WIDTH]) {
     game = new Game(filegrid);
-    //TESTING
-    cout << "A new game with a filegrid was created" << endl;
+    display = new Display();
 }
 
-Controller::~Controller() {}
+Controller::~Controller() {
+    delete game;
+    delete display;
+}
 
 /* play()
  * Takes all user input and passes it to Game 
@@ -45,50 +45,42 @@ Controller::~Controller() {}
  */
 void Controller::play() {
     string cmd;
-    printMenu();
-    while (cin >> cmd) {
-        if (cmd == "q") {
-            //TESTING
-            cout << "Game quit" << endl;
+    while (true) {
+        if (game->getState() == MENU) {
+            display->draw(MENU);
+        } else if (game->getState() == PLAY) {
+            display->draw(PLAY);
+        }
+
+        cin >> cmd;
+        if (cin.fail() || cmd == "q") {
+            display->draw(-1);
             break;
         }
 
-        if (game->getState() == 0) {
-            if (cmd == "s") {
-                //game->newPlayer(SHADE);
-                //TESTING
-                cout << "You have created a new Shade" << endl;
-                game->setState(1);
-            } else if (cmd == "d") {
-                //game->newPlayer(DROW);
-                //TESTING
-                cout << "You have created a new Drow" << endl;
-                game->setState(1);
-            } else if (cmd == "v") {
-                //game->newPlayer(VAMPIRE);
-                //TESTING
-                cout << "You have created a new Vamp" << endl;
-                game->setState(1);
-            } else if (cmd == "g") {
-                //game->newPlayer(GOBLIN);
-                //TESTING
-                cout << "You have created a new Goblin" << endl;
-                game->setState(1);
-            } else if (cmd == "t") {
-                //game->newPlayer(TROLL);
-                //TESTING
-                cout << "You have created a new Troll" << endl;
-                game->setState(1);
+        if (game->getState() == MENU) {
+            if (cmd == "s" || cmd == "d" || cmd == "v" || cmd == "g" || cmd == "t") {
+                if (cmd == "s") {
+                    game->setPlayer(SHADE);
+                } else if (cmd == "d") {
+                    game->setPlayer(DROW);
+                } else if (cmd == "v") {
+                    game->setPlayer(VAMPIRE);
+                } else if (cmd == "g") {
+                    game->setPlayer(GOBLIN);
+                } else if (cmd == "t") {
+                    game->setPlayer(TROLL);
+                }
+                game->load();
+                game->setState(PLAY);
+                updateDisplay();
             } else {
-                cout << "That is not a valid menu command" << endl;
+                display->draw(-2);
             }
-        } else if (game->getState() == 1) {
+        } else if (game->getState() == PLAY) {
             if (cmd == "r") {
-                // restart game
-                //TESTING
-                cout << "You have surrendered" << endl << "Restarting game..." << endl;
-                game->setState(0);
-                printMenu();
+                // Restart Game
+                game->setState(MENU);
             } else if (cmd == "u") {
                 string input;
                 cin >> input;
@@ -100,9 +92,9 @@ void Controller::play() {
                         //Requires Game implementation
                         //game->notify(USE, dir);
                         //TESTING
-                        cout << "You attempted to use an item in direction " << dir << endl;
+                        updateDisplay();
                     } else {
-                        badCommand();
+                        display->draw(-2);
                     }
                 }
             } else if (cmd == "a") {
@@ -116,9 +108,9 @@ void Controller::play() {
                         //Requires Game implementation
                         //game->notify(ATTACK, dir);
                         //TESTING
-                        cout << "You attempted to attack in direction " << dir << endl;
+                        updateDisplay();
                     } else {
-                        badCommand();
+                        display->draw(-2);
                     }
                 }
             } else {
@@ -127,15 +119,31 @@ void Controller::play() {
                     //Requires Game implementation
                     //game->notify(MOVE, dir);
                     //TESTING
-                    cout << "You attempted to move in direction " << dir << endl;
+                    updateDisplay();
                 } else {
-                    badCommand();
+                    display->draw(-2);
                 }
             }
         }
     }
 }
 
+void Controller::updateDisplay() {
+    for (int r = 0; r < HEIGHT; r++) {
+        for (int c = 0; c < WIDTH; c++) {
+            display->updateMap(r, c, game->getCell(r, c)->getDisplayChar());
+        }
+    }
+    //display->updateCharacter(game->getPlayer()->getRace(),
+    //                         game->getPlayer()->getGold(),
+    //                         game->getPlayer()->getHealth(),
+    //                         game->getPlayer()->getAttack(),
+    //                         game->getPlayer()->getDefense());
+    //display->updateMap(game->getPlayerCell()->getRow(),
+    //                   game->getPlayerCell()->getColumn(),
+    //                   game->getPlayerCell()->getDisplayCharacter());
+    //FINDME
+}
 
 /* direction(input)
  * Returns an integer corresponding with the cardinal direction input. Returns 
@@ -157,13 +165,4 @@ int direction(string input) {
     else if (input == "so") { return 7; }
     else if (input == "se") { return 8; }
     else { return 0; }
-}
-
-void printMenu() {
-    cout << "Select a race to begin the game, or (q) to quit" << endl;
-    cout << "(s)hade, (d)row, (v)ampire, (g)oblin, (t)roll: ";
-}
-
-void badCommand() {
-    cout << "That is not a valid command" << endl;
 }

@@ -4,6 +4,9 @@
 const int WIDTH = 79;
 const int HEIGHT = 25;
 
+const int MENU = 0;
+const int PLAY = 1;
+
 const int MOVE = 0;
 const int USE = 1;
 const int ATTACK = 2;

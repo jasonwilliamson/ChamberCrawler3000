@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
     Controller *controller;
-    char filegrid[HEIGHT][WIDTH];
+    char filedata[HEIGHT * 5][WIDTH];
     bool customfile = false;
     if (argc % 2 == 0) {
         cerr << "Usage: cc3k -f [filepath] -s [seed]" << endl;
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
                 if (fs.is_open()) {
                     fs >> noskipws;
                     char cell;
-                    for (int r = 0; r < HEIGHT; r++) {
+                    for (int r = 0; r < HEIGHT * 5; r++) {
                         for (int c = 0; c < WIDTH; c++) {
                             fs >> cell;
                             if (cell == '\n') { fs >> cell; }
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
                                 cerr << "Error: file was not read properly" << endl;
                                 return 1;
                             }
-                            filegrid[r][c] = cell;
+                            filedata[r][c] = cell;
                         }
                     }
                     customfile = true;
@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     }
     
     if (customfile) {
-        controller = new Controller(filegrid);
+        controller = new Controller(filedata);
     } else {
         controller = new Controller();
     }

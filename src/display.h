@@ -5,13 +5,16 @@
 
 class Display {
     char grid[HEIGHT][WIDTH];
+    std::string race, action;
+    int gold, hp, atk, def;
 
   public:
     Display();
     ~Display();
 
-    void draw();
-    void setCell(int r, int c, char symbol);
+    void draw(int state);
+    void updateMap(int row, int col, char cell);
+    void updateCharacter(std::string race, int gold, int hp, int atk, int def);
 };
 
 #endif
