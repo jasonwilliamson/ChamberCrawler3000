@@ -1,22 +1,13 @@
 #include <iostream>
 #include "game.h"
-#include "filelevel.h"
-#include "charboard.h"
 
 using namespace std;
 
-Game::Game():gamestate(0), boardsArray(NULL), currentLevel(0), floor(NULL) {
-    
+Game::Game():gamestate(0), boardsArray(NULL), currentLevel(0) {
 }
 
 Game::Game(char filemap[HEIGHT][WIDTH]):gamestate(0),boardsArray(NULL), currentLevel(0) {
-
-//Game::Game(char **filemap):gamestate(0),boardsArray(NULL), currentLevel(0) {
     //give filemap to level
-    //turn filemap int CharBoard
-    floor = new Floor();
-    CharBoard cboard = CharBoard(HEIGHT, WIDTH, filemap[HEIGHT][WIDTH]);
-    FileLevel level = FileLevel(*floor, cboard);
 }
 
 Game::Game(CharBoard *boardsArray):gamestate(0), boardsArray(boardsArray), currentLevel(0){

@@ -17,8 +17,7 @@ private:
     
 public:
     CharBoard();
-    //CharBoard(int rows, int columns, char **board);
-    CharBoard(int rows, int columns, char board[HEIGHT][WIDTH]);
+    CharBoard(int rows, int columns);
     ~CharBoard();
     char **board;
     int getRows();

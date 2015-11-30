@@ -11,14 +11,11 @@
 
 #include "gameobject.h"
 #include "player.h"
-#include "item.h"
 
 class Vampire: public Player{
 private:
     
 public:
-    Vampire();
-    ~Vampire();
     void move(char dir);
     void use(Item *);
     void setHp(int);

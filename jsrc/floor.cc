@@ -8,7 +8,7 @@ using namespace std;
 Floor::Floor():grid(NULL) {
 }
 
-Floor::~Floor(){}
+Floor::~Floor() {}
 
 void Floor::setCellNormal(int row, int col, char defaultTile){
     grid[row][col] = Cell(row, col, defaultTile);

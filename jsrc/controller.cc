@@ -11,9 +11,7 @@ Controller::Controller() {
 }
 
 Controller::Controller(char filegrid[HEIGHT][WIDTH]) {
-
-//Controller::Controller(char **filegrid) {
-    game = new Game(filegrid[HEIGHT][WIDTH]);
+    game = new Game(filegrid);
     //TESTING
     cout << "A new game with a filegrid was created" << endl;
 }

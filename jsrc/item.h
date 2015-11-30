@@ -12,7 +12,7 @@
 #include "gameobject.h"
 
 class Item: public GameObject{
-protected:
+private:
     char value;
 public:
     Item(char value);

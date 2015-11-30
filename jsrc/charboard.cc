@@ -10,9 +10,7 @@
 
 CharBoard::CharBoard():rows(HEIGHT), columns(WIDTH){}
 
-//CharBoard::CharBoard(int rows, int columns, char **board):rows(rows), columns(columns),board(board){}
-CharBoard(int rows, int columns, char board[HEIGHT][WIDTH]):rows(rows), columns(columns),
-    board(board[HEIGHT][WIDTH]){}
+CharBoard::CharBoard(int rows, int columns):rows(rows), columns(columns){}
 
 CharBoard::~CharBoard(){}
 

@@ -32,12 +32,11 @@ public:
     char getGameObjectChar();
     void setGameObjectChar(char);
     void setGameObject(GameObject *);
-    GameObject* getGameObject();
+    int getGameObject();
     int getRow();
     int getColumn();
     void setRow(int);
     void setColumn(int);
-    bool isStairs();
     //void determineNeighbours()
     //notify neighboursOfPlayer
     //notify neighboursOfEnemy

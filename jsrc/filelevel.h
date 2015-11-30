@@ -19,7 +19,6 @@ private:
     Floor &floor;
     GameObject * initPlayer();
     GameObject * initPotion(char val, int potionType);
-    GameObject * initTreasure(char val, int treasureType);
 public:
     FileLevel(Floor &floor, CharBoard &cboard);
     ~FileLevel();

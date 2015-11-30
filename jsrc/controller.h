@@ -13,7 +13,6 @@ class Controller {
   public:
     Controller();
     Controller(char filegrid[HEIGHT][WIDTH]);
-    //Controller(char **filegrid);
     ~Controller();
 
     void play();

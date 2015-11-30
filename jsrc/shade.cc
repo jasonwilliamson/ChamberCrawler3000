@@ -7,7 +7,6 @@
 //
 
 #include "shade.h"
-#include "item.h"
 
 #define HP 125
 #define ATK 25
@@ -23,10 +22,6 @@ void Shade::move(char dir){
 
 void Shade::use(Item *itm){
     
-}
-
-void Shade::setHp(int hp){
-    this->hp = hp;
 }
 
 int Shade::getHp(){
