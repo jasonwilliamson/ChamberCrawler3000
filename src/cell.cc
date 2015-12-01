@@ -19,6 +19,7 @@ Cell::~Cell(){
 void Cell::setGameObject(char gameObjectChar, GameObject *gameObj){
     this->defaultChar = '.'; //this needs to be modified
     this->gameObjectChar = gameObjectChar;
+    this->gameObj = gameObj;
 }
 
 void Cell::setDefaultChar(char c){
