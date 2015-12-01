@@ -8,13 +8,19 @@
 
 #include <iostream>
 #include "filelevel.h"
-#include "floor.h"
-#include "charboard.h"
+#include "cell.h"
+//#include "floor.h"
+//#include "charboard.h"
 #include "shade.h"
 #include "potion.h"
+#include "treasure.h"
 
 using namespace std;
-FileLevel::FileLevel(Floor &floor, CharBoard &cboard):floor(floor), cboard(cboard){}
+//FileLevel::FileLevel(Floor &floor, CharBoard &cboard):floor(floor), cboard(cboard){}
+//FileLevel::FileLevel(Cell *cellGrid[HEIGHT][WIDTH], char *fileMap[HEIGHT][WIDTH]){
+//    this->cellGrid[HEIGHT][WIDTH] = cellGrid[HEIGHT][WIDTH];
+//}
+FileLevel::FileLevel(){}
 
 FileLevel::~FileLevel(){}
 
@@ -29,88 +35,45 @@ GameObject* FileLevel::initPotion(char val, int potionType){
     return obj;
 }
 
-void FileLevel::initLevel(){
+GameObject* FileLevel::initTreasure(char val, int treasureType){
+    GameObject *obj = new Treasure(val, treasureType);
+    return obj;
+}
+
+GameObject* FileLevel::initEnemy(char val){
+    GameObject *obj;
+    //switch case probably
+    //if (val == 'H') {
+    //    obj = new Human()
+    //}
+    return obj;
+}
+
+void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]){
     char playerChar = '@';
-    char stairChar = '\\';
-    // default tiles = { - | # + ' ' . }
-    char defaultTiles[6] = {'-', '|', '#', '+', ' ', '.'};
-    int defaultTileArraySize = 6;
     
-    char potionTiles[6] = { '0', '1', '2', '3', '4', '5' };
-    int potionTileArraySize = 6;
-    char goldTiles[4] = {'6', '7', '8', '9' };
-    int goldTileArraySize = 4;
-    
-    bool valueFound = false;
-    
-    for (int i = 0; i < cboard.getRows(); i++) {
-        for (int j = 0; j < cboard.getColumns(); j++) {
-            //if char is not one of the standard tiles
-            // check against character, items and instantiate necessary objects as pointer in cell
-            // first start by building grid with one type of player, enemy, potion, gold ..
-            char value = cboard.board[i][j];
-            for (int k = 0; k < defaultTileArraySize; k++) {
-                if (value == defaultTiles[k]) {
-                    // set cell with tile thing
-                    // break to iterate to next char in cboard
-                    //floor.setCellwithDefaultSym(i, j, value);
-                    floor.setCellNormal(i, j, value);
-                    valueFound = true;
-                    break;
-                }
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            char value = fileMap[i][j];
+            if (value == '|' || value == '-' || value == '+' ||
+                value == '#' || value == ' ' || value == '.' ||
+                value == '\\') {
+                cellGrid[i][j]->setDefaultChar(value);
+            }else if (value == playerChar) {
+                cellGrid[i][j]->setGameObject(value, initPlayer());
+            }else if (value == '0' || value == '1' || value == '2' ||
+                      value == '3' || value == '4' || value == '5'){
+                int num = value - '0';
+                cellGrid[i][j]->setGameObject(value, initPotion(value, num));
+            }else if (value == '6'|| value == '7' || value == '8' || value == '9'){
+                int num = value - '0';
+                cellGrid[i][j]->setGameObject(value, initTreasure(value, num));
+            }else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
+                      value == 'M' || value == 'D'){
+                
+            }else{
+                cout << "Error cell value not found!" << endl;
             }
-            if (valueFound) {
-                valueFound = false;
-                break;
-            }
-            
-            if (value == playerChar) {
-                //what if in hall way ..might need game lookup here to make sure tile char is correct
-                //floor.setCellwithGameObjectSym(i, j, '.', '@');
-                //floor.setCellGameObject(i, j, initPlayer());
-                floor.setCellGameObject(i, j, '.', '@', initPlayer());
-                //instiantiate player
-                break;
-            }
-            if (value == stairChar) {
-                //instiantiate stair ?? is it any different. should it be
-                break;
-            }
-            // also must check for '@' and '\'
-            
-            // here tile is not default must be either
-            // '/' '@' //will need to set PLAYER TYPE
-            //potions = { '0' - RH , '1' - BA, '2'- BD, '3' - PH, 4 - WA, '5' - WD
-            // gold = { '6' - normal, '7' - small hoard, '8' - merchant hoard, '9' - dragon hoard
-            // enemies 'H' human, 'W' dwarf, 'E' elf, 'O' orc, 'M' merchant, 'D' dragon, 'L' Halfling
-            for (int k = 0; k < potionTileArraySize; i++) {
-                if (value == potionTiles[k]) {
-                    //floor.setCellwithGameObjectSym(i, j, '.', value);
-                    // we must instantiate a potion
-                    // we really want to set gameObject here to one of the potion types
-                    int num = value - '0';
-                    floor.setCellGameObject(i, j, '.', 'P', initPotion('P', num));
-                    valueFound = true;
-                    break;
-                }
-            }
-            
-            // skip this value, continue onto next
-            if (valueFound) {
-                valueFound = false;
-                break;
-            }
-            
-            for (int k = 0; k < goldTileArraySize; k++) {
-                if (value == goldTiles[k]) {
-                    // we must instantiate a gold type
-                    //floor.setCellwithGameObjectSym(i, j, '.', value);
-                    valueFound = true;
-                    break;
-                }
-            }
-            
-            cout << "Error cell value not found!" << endl;
         }
     }
 }

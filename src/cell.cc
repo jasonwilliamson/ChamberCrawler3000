@@ -10,17 +10,20 @@
 #include "cell.h"
 #include <cstdlib>
 
-//Cell::Cell():row(0), column(0), defaultChar(' '), gameObjectChar(' '){}
+Cell::Cell(int row, int column):row(row), column(column), defaultChar(' '), gameObjectChar(' '), gameObj(NULL){}
 
-Cell::Cell(int row, int column, char defaultChar)
-    :row(row), column(column), defaultChar(defaultChar), gameObjectChar(' '), gameObj(NULL ) {}
+Cell::~Cell(){
+    delete gameObj;
+}
 
-//Cell::Cell(int row, int column, char defaultChar, char gameObjectChar):
-//    row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar){}
+void Cell::setGameObject(char gameObjectChar, GameObject *gameObj){
+    this->defaultChar = '.'; //this needs to be modified
+    this->gameObjectChar = gameObjectChar;
+}
 
-Cell::Cell(int row, int column, char defaultChar, char gameObjectChar, GameObject* gameObj)
-    :row(row), column(column),defaultChar(defaultChar), gameObjectChar(gameObjectChar), gameObj(gameObj){}
-
+void Cell::setDefaultChar(char c){
+    this->defaultChar = c;
+}
 
 char Cell::getCellChar() {
     if(gameObj) {

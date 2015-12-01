@@ -13,6 +13,8 @@ Booster::Booster():attack(0), defence(0){}
 
 Booster::Booster(int atk, int def):attack(atk), defence(def){}
 
+Booster::~Booster(){}
+
 //Booster::~Booster();
 
 

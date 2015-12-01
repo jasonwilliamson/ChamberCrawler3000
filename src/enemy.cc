@@ -1,6 +1,6 @@
 #include "enemy.h"
 
-Enemy::Enemy() : GameObject("player", 'X') {}
+Enemy::Enemy(){}
 
 Enemy::~Enemy() {}
 

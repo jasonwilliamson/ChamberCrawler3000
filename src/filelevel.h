@@ -1,5 +1,5 @@
 //
-//  filelevel.hpp
+//  filelevel.h
 //  loadingFromFile
 //
 //  Created by Jason Williamson on 2015-11-29.
@@ -10,20 +10,25 @@
 #define filelevel_hpp
 
 #include "level.h"
-#include "floor.h"
-#include "charboard.h"
+#include "constants.h"
+#include "cell.h"
+//#include "floor.h"
+//#include "charboard.h"
 
 class FileLevel: public Level{
 private:
-    CharBoard &cboard;
-    Floor &floor;
+    //Cell *cellGrid[HEIGHT][WIDTH];
+    //char *fileMap[HEIGHT][WIDTH];
     GameObject * initPlayer();
     GameObject * initPotion(char val, int potionType);
+    GameObject * initTreasure(char val, int treasureType);
+    GameObject * initEnemy(char val);
 public:
-    FileLevel(Floor &floor, CharBoard &cboard);
+    //FileLevel(Cell *cellGrid[HEIGHT][WIDTH], char *fileMap[HEIGHT][WIDTH]);
+    FileLevel();
     ~FileLevel();
-    void initLevel();
+    void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]);
 };
 
 
-#endif /* filelevel_hpp */
+#endif

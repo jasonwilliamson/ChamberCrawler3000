@@ -1,5 +1,8 @@
 #include <iostream>
 #include "game.h"
+#include "level.h"
+#include "filelevel.h"
+#include "cell.h"
 
 using namespace std;
 
@@ -34,9 +37,13 @@ Game::~Game() {}
  */
 void Game::load() {
     if (fromFile) {
-        levelCreator->generate(cellGrid, fileMaps[curFloor - 1]);
+        FileLevel level = FileLevel();
+        level.initLevel(cellGrid, fileMaps[curFloor - 1]);
+        //levelCreator->initL
+        //levelCreator = FileLevel(cellGrid, fileMaps[curFloor - 1]);
+        //levelCreator->generate(cellGrid, fileMaps[curFloor - 1]);
     } else {
-        levelCreator->generate(cellGrid);
+        //levelCreator->generate(cellGrid);
     }
 }
 

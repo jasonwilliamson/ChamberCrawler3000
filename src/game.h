@@ -2,11 +2,12 @@
 #define GAME_H
 #include "level.h"
 #include "display.h"
+#include "cell.h"
 
 class Game {
     Player* player;   
     Display* display;
-    Level* levelCreator;
+    Level *levelCreator;
     Cell* cellGrid[HEIGHT][WIDTH];
     Cell* playerCell;
     int gamestate;

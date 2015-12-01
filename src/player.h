@@ -20,12 +20,12 @@ protected:
 public:
     Player(int hp, int atk, int def);
     virtual ~Player();
-    virtual void move(char dir);
-    virtual void use(Item *);
-    virtual void setHp(int);
-    virtual int getHp();
-    virtual int getAtk();
-    virtual int getDef();
+    virtual void move(char dir) = 0;
+    virtual void use(Item *) = 0;
+    //virtual void setHp(int);
+    virtual int getHp() = 0;
+    virtual int getAtk() = 0;
+    virtual int getDef() = 0;
 };
 
 #endif 

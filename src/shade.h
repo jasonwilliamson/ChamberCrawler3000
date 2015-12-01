@@ -20,7 +20,7 @@ public:
     ~Shade();
     void move(char dir);
     void use(Item *);
-    void setHp(int);
+    //void setHp(int);
     int getHp();
     int getAtk();
     int getDef();

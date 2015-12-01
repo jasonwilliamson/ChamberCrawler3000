@@ -11,11 +11,13 @@
 #define level_hpp
 
 #include "player.h"
+#include "constants.h"
+#include "cell.h"
 
 class Level{
 public:
     virtual ~Level();
-    //virtual Player* createPlayer(char);
+    virtual void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]) = 0;
 };
 
-#endif /* level_hpp */
+#endif

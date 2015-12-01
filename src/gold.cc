@@ -1,6 +1,6 @@
 #include "gold.h"
 
-Gold::Gold(int value) : GameObject("gold", 'G'), value(value) {}
+Gold::Gold(int value){}
 
 Gold::~Gold() {}
 

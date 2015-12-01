@@ -21,26 +21,25 @@ private:
     char gameObjectChar;
     
 public:
-    //Cell();
-    //Cell(int row, int column, char defualtChar);
-    //Cell(int row, int column, char defaultChar, char gameObjectChar);
-    Cell(int row, int column, char defaultChar);
-    Cell(int row, int column, char defaultChar, char gameObjectChar, GameObject* gameObj);
+    Cell(int row, int column);
     ~Cell();
+    
+    char getCellChar();
     char getDefaultChar();
     void setDefaultChar(char);
     char getGameObjectChar();
-    void setGameObjectChar(char);
-    void setGameObject(GameObject *);
+    void setGameObject(char, GameObject *);
     int getGameObject();
+    
     int getRow();
     int getColumn();
     void setRow(int);
     void setColumn(int);
+    
     //void determineNeighbours()
     //notify neighboursOfPlayer
     //notify neighboursOfEnemy
     //notify neightboursOfDragonGold..or something
 };
 
-#endif /* cell_hpp */
+#endif

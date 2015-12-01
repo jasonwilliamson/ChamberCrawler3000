@@ -1,21 +1,18 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
-#include <string>
+// ====================================================
+// Jason Williamson (20552360)
+// David Inglis
+// CS 246 Fall 2015
+// Assignment 05, CC3K
+// File: gameobject.h
+// ====================================================
+//
 
-class GameObject {
-  private:
-    std::string type;
-    char displayChar;
+#ifndef gameobject_hpp
+#define gameobject_hpp
 
-  public:
-    GameObject(std::string type, char displayChar);
+class GameObject{
+    
+public:
     virtual ~GameObject();
-
-    std::string getType();
-    char getDisplayChar();
-    void setType(std::string type);
-    void setDisplayChar(char displayChar);
-    virtual bool use();
 };
-
 #endif
