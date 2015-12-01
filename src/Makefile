@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS =  -Wall -g -MMD
 EXEC = cc3k
-OBJECTS = client.o controller.o game.o cell.o display.o enemy.o gameobject.o gold.o level.o player.o potion.o treasure.o booster.o filelevel.o human.o vampire.o shade.o item.o character.o
+OBJECTS = client.o controller.o game.o cell.o display.o enemy.o gameobject.o level.o player.o potion.o treasure.o booster.o filelevel.o human.o vampire.o shade.o item.o character.o enemycatalogue.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

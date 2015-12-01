@@ -15,5 +15,18 @@ Character::Character(int hp, int atk, int def):hp(hp), atk(atk), def(def){}
 
 Character::~Character(){}
 
+int Character::getAtk(){
+    return this->atk;
+}
+
+int Character::getHp(){
+    return this->hp;
+}
+
+int Character::getDef(){
+    return this->def;
+}
+
+
 
 

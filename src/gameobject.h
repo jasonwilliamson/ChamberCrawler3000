@@ -13,6 +13,11 @@
 class GameObject{
     
 public:
+    GameObject();
     virtual ~GameObject();
+    bool getTurnFlag();
+    void switchTurnFlag();
+protected:
+    bool turnFlag;
 };
 #endif

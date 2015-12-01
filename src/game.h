@@ -3,6 +3,7 @@
 #include "level.h"
 #include "display.h"
 #include "cell.h"
+#include "enemycatalogue.h"
 
 class Game {
     Player* player;   
@@ -10,11 +11,14 @@ class Game {
     Level *levelCreator;
     Cell* cellGrid[HEIGHT][WIDTH];
     Cell* playerCell;
+    EnemyCatalogue eCatalogue;
     int gamestate;
     int curFloor;
     bool fromFile;
     char fileMaps[5][HEIGHT][WIDTH];
     void setupCellBlockRadii();
+    void updateEnemy();
+    bool masterTurnFlag;
 
   public:
     Game();

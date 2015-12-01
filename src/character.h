@@ -22,7 +22,6 @@ public:
 //    Character();
     Character(int hp, int atk, int def);
     virtual ~Character();
-    void setHP(int);
     int getHp();
     int getAtk();
     int getDef();

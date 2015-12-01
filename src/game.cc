@@ -10,6 +10,7 @@ Game::Game():gamestate(0), curFloor(1) {
     nullCells();
     fromFile = false;
     playerCell = NULL;
+    masterTurnFlag = true;
 }
 
 /* Game(filedata)
@@ -27,6 +28,7 @@ Game::Game(char data[HEIGHT * 5][WIDTH]):gamestate(0), curFloor(1) {
     nullCells();
     fromFile = true;
     playerCell = NULL;
+    masterTurnFlag = true;
 }
 
 Game::~Game() {}
@@ -87,6 +89,36 @@ void Game::nullCells() {
         }
     }
     setupCellBlockRadii();
+}
+
+
+//update cells ENEMIES TURE
+void Game::updateEnemy(){
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            Cell *tmpCell = cellGrid[i][j];
+            
+            //check if enemy has had turn
+            if (masterTurnFlag != tmpCell->getGameObject()->getTurnFlag()) {
+                char cellChar = tmpCell->getCellChar();
+                if (eCatalogue.isEnemy(cellChar)) {
+                    if(tmpCell->isPlayerWithinBlock()){
+                        //int enemyAtk = eCatalogue.getAtk(cellChar);
+                    
+                        //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
+                    
+                    }else{
+                        //update -> check if player is within one block radious of this enemy
+                        //       (if yes attack)
+                        //  otherwise -> check for valid move posibilities , randomize, then move..
+                        // set turnflag
+                    }
+                }
+                //switch all cells
+                tmpCell->getGameObject()->switchTurnFlag();
+            }
+        }
+    }
 }
 
 /* Game::notify(mode, direction)

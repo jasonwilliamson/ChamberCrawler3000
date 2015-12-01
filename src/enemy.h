@@ -8,8 +8,7 @@ class Enemy : public Character {
     Enemy(int hp, int atk, int def);
     ~Enemy();
     virtual void update() = 0;
-private:
-    
+    virtual void attack() = 0;
 };
 
 #endif

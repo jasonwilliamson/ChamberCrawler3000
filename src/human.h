@@ -16,7 +16,7 @@ public:
     Human();
     ~Human();
     void update();
-private:
+    void attack();
 };
 
 #endif

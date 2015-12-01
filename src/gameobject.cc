@@ -9,6 +9,16 @@
 
 #include "gameobject.h"
 
+GameObject::GameObject():turnFlag(false){}
+
 GameObject::~GameObject(){}
+
+bool GameObject::getTurnFlag(){
+    return this->turnFlag;
+}
+
+void GameObject::switchTurnFlag(){
+    this->turnFlag = !this->turnFlag;
+}
 
 

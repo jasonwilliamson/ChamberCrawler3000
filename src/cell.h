@@ -30,13 +30,14 @@ public:
     Cell(int row, int column);
     ~Cell();
     
+    bool isPlayerWithinBlock();
     void addNeighbourBlock(Cell *block);
     char getCellChar();
     char getDefaultChar();
     void setDefaultChar(char);
     char getGameObjectChar();
     void setGameObject(char, GameObject *);
-    int getGameObject();
+    GameObject* getGameObject();
     
     int getRow();
     int getColumn();

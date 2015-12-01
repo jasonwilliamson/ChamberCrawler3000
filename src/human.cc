@@ -9,12 +9,16 @@
 #include "human.h"
 #include "character.h"
 
-#define HP 125
-#define ATK 25
-#define DEF 25
+#define HP 140
+#define ATK 20
+#define DEF 20
+
+//140 HP, 20 Atk, 20 Def, drops 2 normal piles of gold
 
 Human::Human():Enemy(HP, ATK, DEF){}
 
 Human::~Human(){}
 
 void Human::update(){}
+
+void Human::attack(){}

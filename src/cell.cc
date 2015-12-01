@@ -44,6 +44,20 @@ char Cell::getDefaultChar(){
     return this->defaultChar;
 }
 
+GameObject* Cell::getGameObject(){
+    return this->getGameObject();
+}
+
+//determines if player is within 1 block radius of cell
+bool Cell::isPlayerWithinBlock(){
+    for (int i = 0; i < playerBlockCount; i++) {
+        if (playerBlockRadius[i]->getCellChar() == '@') {
+            return true;
+        }
+    }
+    return false;
+}
+
 //only adds blocks where valid moves can be made
 void Cell::addNeighbourBlock(Cell *block){
     char value = block->getDefaultChar();
