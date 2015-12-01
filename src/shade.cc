@@ -20,18 +20,10 @@ void Shade::move(char dir){
     
 }
 
-void Shade::use(Item *itm){
+void Shade::use(Potion* p) {
     
 }
 
-int Shade::getHp(){
-    return this->hp;
-}
+void Shade::use(Treasure* g) {
 
-int Shade::getAtk(){
-    return this->atk;
-}
-
-int Shade::getDef(){
-    return this->def;
 }

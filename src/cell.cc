@@ -15,8 +15,7 @@
 using namespace std;
 
 Cell::Cell(int row, int column):
-    row(row), column(column), defaultChar(' '), gameObjectChar(' '), gameObj(NULL),
-    enemyBlockCount(0), playerBlockCount(0){}
+    row(row), column(column), defaultChar(' '), gameObjectChar(' '), enemyBlockCount(0), playerBlockCount(0), gameObj(NULL) {}
 
 Cell::~Cell(){
     delete gameObj;

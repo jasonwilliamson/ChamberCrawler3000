@@ -92,7 +92,7 @@ void Game::nullCells() {
 }
 
 
-//update cells ENEMIES TURE
+//update cells ENEMIES TURN
 void Game::updateEnemy(){
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -127,7 +127,13 @@ void Game::updateEnemy(){
  * int, int -> void
  */
 void Game::notify(int mode, int direction) {
-
+    if (mode == USE) {
+        //use item in direction dir
+    } else if (mode == ATTACK) {
+        //attack in direction dir
+    } else if (mode == MOVE) {
+        //bool canMove = true;
+    }
 }
 
 /* Game::getState()

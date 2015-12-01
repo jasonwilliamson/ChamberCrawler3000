@@ -10,7 +10,6 @@
 #define potion_hpp
 
 #include "item.h"
-#include "player.h"
 
 class Potion : public Item {
   private:
@@ -18,7 +17,7 @@ class Potion : public Item {
   public:
     Potion(char val, int potionType);
     ~Potion();
-    void use(Player& player);
+    //void use(Player& player);
     void setType(int potionType);
     int getType();
 };

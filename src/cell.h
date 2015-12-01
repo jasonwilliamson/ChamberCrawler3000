@@ -22,9 +22,9 @@ private:
     char gameObjectChar;
     int enemyBlockCount;
     int playerBlockCount;
-    GameObject *gameObj;
     Cell *enemyBlockRadius[MAX_NEIGHBOURS];
     Cell *playerBlockRadius[MAX_NEIGHBOURS];
+    GameObject *gameObj;
     
 public:
     Cell(int row, int column);

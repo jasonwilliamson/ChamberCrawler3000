@@ -12,19 +12,24 @@
 
 #include "gameobject.h"
 
-class Character: public GameObject{
-protected:
+class Character : public GameObject {
+  protected:
     int hp;
     int atk;
     int def;
+    int gold;
     
-public:
-//    Character();
+  public:
     Character(int hp, int atk, int def);
     virtual ~Character();
     int getHp();
     int getAtk();
     int getDef();
+    int getGold();
+    void setHp(int hp);
+    void setAtk(int atk);
+    void setDef(int def);
+    void setGold(int gold);
 };
 
 #endif /* character_hpp */

@@ -13,17 +13,12 @@
 #include "player.h"
 
 class Vampire: public Player{
-private:
-    
-public:
+  public:
+    Vampire();
+    ~Vampire();
     void move(char dir);
-    void use(Item *);
-    void setHp(int);
-    int getHp();
-    int getAtk();
-    int getDef();
+    void use(Potion* p);
+    void use(Treasure* g);
 };
-
-
 
 #endif

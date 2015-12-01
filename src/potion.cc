@@ -20,7 +20,7 @@ Potion::Potion(char val, int potionType):Item(val), potionType(potionType){}
 
 Potion::~Potion(){}
 
-void Potion::use(Player& player){}
+//void Potion::use(Player& player){}
 
 void Potion::setType(int potionType){
     this->potionType = potionType;
