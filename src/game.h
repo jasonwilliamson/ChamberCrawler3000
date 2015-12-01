@@ -14,6 +14,7 @@ class Game {
     int curFloor;
     bool fromFile;
     char fileMaps[5][HEIGHT][WIDTH];
+    void setupCellBlockRadii();
 
   public:
     Game();

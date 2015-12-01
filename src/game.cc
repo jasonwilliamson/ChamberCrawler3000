@@ -31,6 +31,40 @@ Game::Game(char data[HEIGHT * 5][WIDTH]):gamestate(0), curFloor(1) {
 
 Game::~Game() {}
 
+
+void Game::setupCellBlockRadii(){
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            int row = i;
+            int col = j;
+            if (((row - 1) >= 0) && ((col - 1) >= 0)) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i-1][j-1]);
+            }
+            if ((row - 1) >= 0) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i-1][j]);
+            }
+            if (((row - 1) >= 0) && ((col + 1) < WIDTH)) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i-1][j+1]);
+            }
+            if ((col - 1) >= 0) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i][j-1]);
+            }
+            if ((col + 1) < WIDTH) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i][j+1]);
+            }
+            if (((row + 1) < HEIGHT) && ((col - 1) >= 0)) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i+1][j-1]);
+            }
+            if ((row + 1) < HEIGHT) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i+1][j]);
+            }
+            if (((row +1) < HEIGHT) && ((col + 1) < WIDTH)) {
+                cellGrid[i][j]->addNeighbourBlock(cellGrid[i+1][j+1]);
+            }
+        }
+    }
+}
+
 /* load()
  * If !fromFile: randomly generates player position, enemies, gold, potions on the floor
  * If fromFile: generates floor layout specified in file
@@ -43,6 +77,7 @@ void Game::load() {
     } else {
         //levelCreator->generate(cellGrid);
     }
+    
 }
 
 void Game::nullCells() {
@@ -51,6 +86,7 @@ void Game::nullCells() {
             cellGrid[r][c] = new Cell(r, c);
         }
     }
+    setupCellBlockRadii();
 }
 
 /* Game::notify(mode, direction)

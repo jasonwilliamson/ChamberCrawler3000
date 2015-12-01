@@ -12,18 +12,25 @@
 
 #include "gameobject.h"
 
+const int MAX_NEIGHBOURS = 8;
+
 class Cell{
 private:
     int row;
     int column;
     char defaultChar;
     char gameObjectChar;
+    int enemyBlockCount;
+    int playerBlockCount;
     GameObject *gameObj;
+    Cell *enemyBlockRadius[MAX_NEIGHBOURS];
+    Cell *playerBlockRadius[MAX_NEIGHBOURS];
     
 public:
     Cell(int row, int column);
     ~Cell();
     
+    void addNeighbourBlock(Cell *block);
     char getCellChar();
     char getDefaultChar();
     void setDefaultChar(char);

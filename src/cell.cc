@@ -9,8 +9,14 @@
 
 #include "cell.h"
 #include <cstdlib>
+#include <iostream>
 
-Cell::Cell(int row, int column):row(row), column(column), defaultChar(' '), gameObjectChar(' '), gameObj(NULL){}
+
+using namespace std;
+
+Cell::Cell(int row, int column):
+    row(row), column(column), defaultChar(' '), gameObjectChar(' '), gameObj(NULL),
+    enemyBlockCount(0), playerBlockCount(0){}
 
 Cell::~Cell(){
     delete gameObj;
@@ -31,5 +37,23 @@ char Cell::getCellChar() {
         return gameObjectChar;
     } else {
         return defaultChar;
+    }
+}
+
+char Cell::getDefaultChar(){
+    return this->defaultChar;
+}
+
+//only adds blocks where valid moves can be made
+void Cell::addNeighbourBlock(Cell *block){
+    char value = block->getDefaultChar();
+    if (value == '.') {
+        enemyBlockRadius[enemyBlockCount] = block;
+        playerBlockRadius[playerBlockCount] = block;
+        ++enemyBlockCount;
+        ++playerBlockCount;
+    }else if (value == '#' || value == '+' || value == '\\'){
+        playerBlockRadius[playerBlockCount] = block;
+        ++playerBlockCount;
     }
 }
