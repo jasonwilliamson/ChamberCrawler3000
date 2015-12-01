@@ -71,7 +71,7 @@ void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WI
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject(value, initTreasure(value, num));
             }else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
-                      value == 'M' || value == 'D'){
+                      value == 'M' || value == 'D' || value == 'L'){
                 cellGrid[i][j]->setGameObject(value, initEnemy(value));
             }else{
                 cout << "Error cell value not found!" << endl;
