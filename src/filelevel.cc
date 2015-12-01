@@ -14,6 +14,7 @@
 #include "shade.h"
 #include "potion.h"
 #include "treasure.h"
+#include "human.h"
 
 using namespace std;
 //FileLevel::FileLevel(Floor &floor, CharBoard &cboard):floor(floor), cboard(cboard){}
@@ -40,8 +41,9 @@ GameObject* FileLevel::initTreasure(char val, int treasureType){
     return obj;
 }
 
+//add new enemies here...
 GameObject* FileLevel::initEnemy(char val){
-    GameObject *obj;
+    GameObject *obj = new Human();
     //switch case probably
     //if (val == 'H') {
     //    obj = new Human()
@@ -70,7 +72,7 @@ void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WI
                 cellGrid[i][j]->setGameObject(value, initTreasure(value, num));
             }else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
                       value == 'M' || value == 'D'){
-                
+                cellGrid[i][j]->setGameObject(value, initEnemy(value));
             }else{
                 cout << "Error cell value not found!" << endl;
             }
