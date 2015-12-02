@@ -109,7 +109,7 @@ void Game::updateEnemy(){
         for (int c = 0; c < WIDTH; c++) {
             //Cell *tmpCell = cellGrid[r][c];
             //Just movement for now
-            char cellChar = cellGrid[r][c]->getCellChar();
+            /*char cellChar = cellGrid[r][c]->getCellChar();
             GameObject* go = cellGrid[r][c]->getGameObject();
             if (eCatalogue.isEnemy(cellChar)) {
                 if (go->getTurnFlag() == false) {
@@ -136,10 +136,11 @@ void Game::updateEnemy(){
                     }
                 }
                 go->switchTurnFlag();
-            }
+            }*/
             
-            /* 
+            
             //check if enemy has had turn
+            Cell *tmpCell = cellGrid[r][c];
             if (masterTurnFlag != tmpCell->getGameObject()->getTurnFlag()) {
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
@@ -152,11 +153,12 @@ void Game::updateEnemy(){
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100/100 + playerDefense) * enemyAtk);
+                            /*int damage = ceil((100/100 + playerDefense) * enemyAtk);
                             player->setDamageHp(damage);
                             if(player->isSlain()){
                                 cout << "player has been slain" << endl;
-                            }
+                            }*/
+                            cout << "enemy will attack" << endl;
                         }else{
                             //attack missed
                             cout << "enemies attack missed" << endl;
@@ -168,9 +170,10 @@ void Game::updateEnemy(){
                 }
                 //show GameObject has had turn
                 tmpCell->getGameObject()->switchTurnFlag();
-            }*/
+            }
         }
     }
+    masterTurnFlag = !masterTurnFlag;
 }
 
 /* Game::notify(mode, direction)

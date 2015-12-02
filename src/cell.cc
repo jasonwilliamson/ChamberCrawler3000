@@ -73,8 +73,7 @@ void Cell::setColumn(int c) {
     column = c;
 }
 
-//will move enemy randomly to // error here will move to any of the 8 blocks surround enemy
-// need to only make up left right down possible moves.
+//will move enemy randomly within the one block radius of current cell
 void Cell::randomizeEnemyMovement(){
     int possible = 0;
     Cell *tmpArr[enemyBlockCount];
@@ -89,9 +88,10 @@ void Cell::randomizeEnemyMovement(){
         srand( static_cast<unsigned int>(time(NULL)));
         index = rand() % possible;
     }
-    
+
     Cell *target = tmpArr[index];
     target->setGameObject(this->gameObjectChar, this->gameObj);
+    cout << "moving enemy row: " << this->row <<" col: " << this->column << "To row: " << target->row << " col: " << target->column << endl;
     this->gameObj = NULL;
     this->gameObjectChar = ' ';
 }
