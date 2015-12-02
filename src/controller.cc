@@ -1,5 +1,6 @@
 #include "controller.h"
 #include <iostream> //remove after Game implementation and remove couts
+#include <sstream>
 
 using namespace std;
 
@@ -45,6 +46,7 @@ Controller::~Controller() {
  */
 void Controller::play() {
     string cmd;
+    int rep = 1;
     while (true) {
         if (game->getState() == MENU) {
             display->draw(MENU);
@@ -110,13 +112,22 @@ void Controller::play() {
                     }
                 }
             } else {
-                int dir = direction(cmd);
-                if (dir != 0) {
-                    game->notify(MOVE, dir);
-                    updateDisplay();
+                istringstream ss(cmd);
+                if (ss >> rep) {
+                    cin >> cmd;
                 } else {
-                    display->draw(-2);
+                    rep = 1;
                 }
+                for (int i = 0 ; i < rep; i++) {
+                    int dir = direction(cmd);
+                    if (dir != 0) {
+                        game->notify(MOVE, dir);
+                        updateDisplay();
+                    } else {
+                        display->draw(-2);
+                    }
+                }
+                rep = 1;
             }
         }
     }
