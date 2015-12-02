@@ -105,10 +105,40 @@ iSecret = rand() % 10 + 1;
 
 //update cells ENEMIES TURN
 void Game::updateEnemy(){
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            Cell *tmpCell = cellGrid[i][j];
+    for (int r = 0; r < HEIGHT; r++) {
+        for (int c = 0; c < WIDTH; c++) {
+            //Cell *tmpCell = cellGrid[r][c];
+            //Just movement for now
+            char cellChar = cellGrid[r][c]->getCellChar();
+            GameObject* go = cellGrid[r][c]->getGameObject();
+            if (eCatalogue.isEnemy(cellChar)) {
+                if (go->getTurnFlag() == false) {
+                    int direction = rand() % 8 + 1;
+                    int checkRow = r, checkCol = c;
+                    if (direction == 1 || direction == 2 || direction == 3) {
+                        checkRow--;
+                    }
+                    if (direction == 1 || direction == 4 || direction == 6) {
+                        checkCol--;
+                    }
+                    if (direction == 6 || direction == 7 || direction == 8) {
+                        checkRow++;
+                    }
+                    if (direction == 3 || direction == 5 || direction == 8) {
+                        checkCol++;
+                    }
+
+                    if (cellGrid[checkRow][checkCol]->getCellChar() == '.') {
+                        cellGrid[checkRow][checkCol]->setGameObject(
+                                cellGrid[r][c]->getCellChar(), 
+                                cellGrid[r][c]->getGameObject());
+                        cellGrid[r][c]->removeGameObject();
+                    }
+                }
+                go->switchTurnFlag();
+            }
             
+            /* 
             //check if enemy has had turn
             if (masterTurnFlag != tmpCell->getGameObject()->getTurnFlag()) {
                 char cellChar = tmpCell->getCellChar();
@@ -138,7 +168,7 @@ void Game::updateEnemy(){
                 }
                 //show GameObject has had turn
                 tmpCell->getGameObject()->switchTurnFlag();
-            }
+            }*/
         }
     }
 }
@@ -178,6 +208,7 @@ void Game::notify(int mode, int direction) {
             cellGrid[playerRow][playerCol]->removeGameObject();
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
+            updateEnemy();
         } else {
             //ActionEvent
             //action->update("You cannot go there.");

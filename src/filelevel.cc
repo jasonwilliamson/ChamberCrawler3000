@@ -67,12 +67,15 @@ Cell* FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][W
                        value == '3' || value == '4' || value == '5'){
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject('P', initPotion(value, num));
+                cellGrid[i][j]->setDefaultChar('.');
             } else if (value == '6'|| value == '7' || value == '8' || value == '9'){
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject('G', initTreasure(value, num));
+                cellGrid[i][j]->setDefaultChar('.');
             } else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
                        value == 'M' || value == 'D' || value == 'L'){
                 cellGrid[i][j]->setGameObject(value, initEnemy(value));
+                cellGrid[i][j]->setDefaultChar('.');
             } else{
                 cout << "Error cell value not found!" << endl;
             }
