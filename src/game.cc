@@ -175,7 +175,7 @@ void Game::notify(int mode, int direction) {
         char check_char = cellGrid[checkRow][checkCol]->getCellChar();
         if (check_char == '.' || check_char == '#' || check_char == '+') {
             cellGrid[checkRow][checkCol]->setGameObject('@', cellGrid[playerRow][playerCol]->getGameObject());
-            cellGrid[playerRow][playerCol]->setGameObject(check_char, NULL);
+            cellGrid[playerRow][playerCol]->removeGameObject();
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
         } else {

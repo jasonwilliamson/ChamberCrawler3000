@@ -62,6 +62,7 @@ Cell* FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][W
                 playerCell = new Cell(i, j);
                 playerCell->setGameObject(value, initPlayer());
                 cellGrid[i][j]->setGameObject(value, playerCell->getGameObject());
+                cellGrid[i][j]->setDefaultChar('.');
             } else if (value == '0' || value == '1' || value == '2' ||
                        value == '3' || value == '4' || value == '5'){
                 int num = value - '0';

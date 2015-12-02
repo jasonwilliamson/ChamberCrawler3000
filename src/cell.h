@@ -30,21 +30,23 @@ public:
     Cell(int row, int column);
     ~Cell();
     
-    bool isPlayerWithinBlock();
-    void addNeighbourBlock(Cell *block);
     char getCellChar();
     char getDefaultChar();
     void setDefaultChar(char);
     char getGameObjectChar();
-    void setGameObject(char, GameObject *);
+    void setGameObjectChar(char);
     GameObject* getGameObject();
-    void randomizeEnemyMovement();
-    void moveGameObject(char, GameObject *);
-    
+    void setGameObject(char, GameObject *);
+    void removeGameObject();
     int getRow();
-    int getColumn();
     void setRow(int);
+    int getColumn();
     void setColumn(int);
+
+    bool isPlayerWithinBlock();
+    void addNeighbourBlock(Cell *block);
+    void randomizeEnemyMovement();
+    
     
     //void determineNeighbours()
     //notify neighboursOfPlayer

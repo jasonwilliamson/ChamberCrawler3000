@@ -14,31 +14,14 @@
 
 using namespace std;
 
-Cell::Cell(int row, int column):
-    row(row), column(column), defaultChar(' '), gameObjectChar(' '), enemyBlockCount(0), playerBlockCount(0), gameObj(NULL) {}
+Cell::Cell(int row, int column):row(row), column(column), gameObj(NULL) {}
 
 Cell::~Cell(){
     delete gameObj;
 }
 
-void Cell::setGameObject(char gameObjectChar, GameObject *gameObj){
-    this->defaultChar = '.'; //this needs to be modified
-    this->gameObjectChar = gameObjectChar;
-    this->gameObj = gameObj;
-}
-
-//update this cell with newly placed GameObject
-void Cell::moveGameObject(char gameObjectChar, GameObject *gameObj){
-    this->gameObjectChar = gameObjectChar;
-    this->gameObj = gameObj;
-}
-
-void Cell::setDefaultChar(char c){
-    defaultChar = c;
-}
-
 char Cell::getCellChar() {
-    if(gameObj) {
+    if (gameObj) {
         return gameObjectChar;
     } else {
         return defaultChar;
@@ -49,8 +32,45 @@ char Cell::getDefaultChar(){
     return defaultChar;
 }
 
+void Cell::setDefaultChar(char c){
+    defaultChar = c;
+}
+
+char Cell::getGameObjectChar() {
+    return gameObjectChar;
+}
+
+void Cell::setGameObjectChar(char c) {
+    gameObjectChar = c;
+}
+
 GameObject* Cell::getGameObject(){
     return gameObj;
+}
+
+void Cell::setGameObject(char gameObjectChar, GameObject *gameObj){
+    this->gameObjectChar = gameObjectChar;
+    this->gameObj = gameObj;
+}
+
+void Cell::removeGameObject() {
+    gameObj = NULL;
+}
+
+int Cell::getRow() {
+    return row;
+}
+
+int Cell::getColumn() {
+    return column;
+}
+
+void Cell::setRow(int r) {
+    row = r;
+}
+
+void Cell::setColumn(int c) {
+    column = c;
 }
 
 //will move enemy randomly to // error here will move to any of the 8 blocks surround enemy
@@ -71,7 +91,7 @@ void Cell::randomizeEnemyMovement(){
     }
     
     Cell *target = tmpArr[index];
-    target->moveGameObject(this->gameObjectChar, this->gameObj);
+    target->setGameObject(this->gameObjectChar, this->gameObj);
     this->gameObj = NULL;
     this->gameObjectChar = ' ';
 }
@@ -101,18 +121,3 @@ void Cell::addNeighbourBlock(Cell *block){
     }
 }
 
-int Cell::getRow() {
-    return row;
-}
-
-int Cell::getColumn() {
-    return column;
-}
-
-void Cell::setRow(int r) {
-    row = r;
-}
-
-void Cell::setColumn(int c) {
-    column = c;
-}

@@ -24,3 +24,8 @@ Player::~Player(){
 std::string Player::getRace() {
     return race;
 }
+
+/*
+char Player::getDisplayChar() {
+    return displayChar;
+}*/

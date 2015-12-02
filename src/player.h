@@ -18,6 +18,7 @@
 
 class Player : public Character {
   private:
+//    const char displayChar;
     const std::string race;
   protected:
     Booster *activePotions;
@@ -29,6 +30,7 @@ class Player : public Character {
     virtual void use(Potion* p) = 0;
     virtual void use(Treasure* g) = 0;
     std::string getRace();
+//    char getDisplayChar();
 };
 
 #endif 
