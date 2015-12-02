@@ -38,6 +38,8 @@ public:
     char getGameObjectChar();
     void setGameObject(char, GameObject *);
     GameObject* getGameObject();
+    void randomizeEnemyMovement();
+    void moveGameObject(char, GameObject *);
     
     int getRow();
     int getColumn();

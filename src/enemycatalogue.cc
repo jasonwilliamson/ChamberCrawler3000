@@ -37,7 +37,24 @@ int EnemyCatalogue::getAtk(char value){
         }
         default:
         {
-            cout << "Error EnemyCatalogue: " << value << " not recognized" << endl;
+            cout << "Error EnemyCatalogue:@getAtk " << value << " not recognized" << endl;
+            break;
+        }
+    }
+    return 0;
+}
+
+int EnemyCatalogue::getGoldDropped(char value){
+    switch (value) {
+        case 'H':
+        {
+            Human enemy = Human();
+            return enemy.goldDropped();
+            break;
+        }
+        default:
+        {
+            cout << "Error EnemyCatalogue:@getGoldDropped " << value << " not recognized" << endl;
             break;
         }
     }

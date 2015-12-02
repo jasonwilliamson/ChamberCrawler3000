@@ -12,6 +12,7 @@
 #define HP 140
 #define ATK 20
 #define DEF 20
+#define GOLD_DROPPED 2
 
 //140 HP, 20 Atk, 20 Def, drops 2 normal piles of gold
 
@@ -22,3 +23,7 @@ Human::~Human(){}
 void Human::update(){}
 
 void Human::attack(){}
+
+int Human::goldDropped(){
+    return GOLD_DROPPED;
+}

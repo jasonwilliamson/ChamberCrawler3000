@@ -30,6 +30,8 @@ class Character : public GameObject {
     void setAtk(int atk);
     void setDef(int def);
     void setGold(int gold);
+    void setDamageHp(int damage);
+    bool isSlain();
 };
 
 #endif /* character_hpp */

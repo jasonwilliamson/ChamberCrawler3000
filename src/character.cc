@@ -33,6 +33,23 @@ void Character::setHp(int hp) {
     this->hp = hp;
 }
 
+void Character::setDamageHp(int damage){
+    int newHp = this->hp - damage;
+    if (newHp < 0) {
+        this->hp = 0;
+    }else{
+        this->hp = newHp;
+    }
+}
+
+bool Character::isSlain(){
+    if (this->hp == 0) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
 void Character::setAtk(int atk) {
     this->atk = atk;
 }

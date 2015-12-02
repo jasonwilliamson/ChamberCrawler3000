@@ -26,7 +26,7 @@ public:
     //void lookup(Orc &o);
     int getAtk(char);
     bool isEnemy(char);
-    
+    int getGoldDropped(char value);
 };
 
 #endif 

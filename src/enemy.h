@@ -9,6 +9,7 @@ class Enemy : public Character {
     ~Enemy();
     virtual void update() = 0;
     virtual void attack() = 0;
+    virtual int goldDropped() = 0;
 };
 
 #endif

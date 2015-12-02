@@ -17,6 +17,7 @@ public:
     ~Human();
     void update();
     void attack();
+    int goldDropped();
 };
 
 #endif
