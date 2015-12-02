@@ -141,9 +141,12 @@ void Game::updateEnemy(){
             
             //check if enemy has had turn
             Cell *tmpCell = cellGrid[r][c];
-            if (masterTurnFlag != tmpCell->getGameObject()->getTurnFlag()) {
+            GameObject *tmpGObj = tmpCell->getGameObject();
+            if (masterTurnFlag != tmpGObj->getTurnFlag()) {
+                cout << "ue #1" << endl;
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
+                    cout << "ue #2" << endl;
                     if(tmpCell->isPlayerWithinBlock()){
                         int enemyAtk = eCatalogue.getAtk(cellChar);
                         int playerDefense = player->getDef();
@@ -165,11 +168,12 @@ void Game::updateEnemy(){
                         }
                     }else{
                         //enemy not within one block radius so it must move
+                        cout << "ue #3" << endl;
                         tmpCell->randomizeEnemyMovement();
                     }
                 }
                 //show GameObject has had turn
-                tmpCell->getGameObject()->switchTurnFlag();
+                tmpGObj->switchTurnFlag();
             }
         }
     }
