@@ -12,3 +12,9 @@ ${EXEC}: ${OBJECTS}
 .PHONY: clean
 clean:
 	rm ${OBJECTS} ${EXEC} ${DEPENDS}	
+
+git:
+	mv *.o *.d cc3k ../bin/
+
+ungit:
+	cp ../bin/* .

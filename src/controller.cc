@@ -128,15 +128,18 @@ void Controller::updateDisplay() {
             display->updateMap(r, c, game->getCell(r, c)->getCellChar());
         }
     }
-    //display->updateCharacter(game->getPlayer()->getRace(),
-    //                         game->getPlayer()->getGold(),
-    //                         game->getPlayer()->getHealth(),
-    //                         game->getPlayer()->getAttack(),
-    //                         game->getPlayer()->getDefense());
-    //display->updateMap(game->getPlayerCell()->getRow(),
-    //                   game->getPlayerCell()->getColumn(),
-    //                   game->getPlayerCell()->getDisplayCharacter());
-    //FINDME
+    if (game->getPlayer()) {
+        display->updateCharacter(game->getPlayer()->getRace(),
+                game->getPlayer()->getGold(),
+                game->getPlayer()->getHp(),
+                game->getPlayer()->getAtk(),
+                game->getPlayer()->getDef());
+        display->updateMap(game->getPlayerCell()->getRow(),
+                game->getPlayerCell()->getColumn(),
+                game->getPlayerCell()->getCellChar());
+    } else {
+        //cout << "Player not initialized" << endl;
+    }
 }
 
 /* direction(input)

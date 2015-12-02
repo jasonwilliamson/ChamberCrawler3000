@@ -76,8 +76,7 @@ void Game::setupCellBlockRadii(){
 void Game::load() {
     if (fromFile) {
         FileLevel level = FileLevel();
-        level.initLevel(cellGrid, fileMaps[curFloor - 1], playerCell);
-        
+        playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
     } else {
         //levelCreator->generate(cellGrid);
     }
@@ -157,7 +156,6 @@ void Game::notify(int mode, int direction) {
         cout << "ATTACK!" << endl;
         //attack in direction dir
     } else if (mode == MOVE) {
-        cout << "Am I even getting here?" << endl;
         int playerRow = playerCell->getRow();
         int playerCol = playerCell->getColumn();
         int checkRow = playerRow, checkCol = playerCol;
@@ -173,8 +171,6 @@ void Game::notify(int mode, int direction) {
         if (direction == 3 || direction == 5 || direction == 8) {
             checkCol++;
         }
-        cout << "Current player position: " <<playerRow<<", "<<playerCol<<endl;
-        cout << "New position: "<<checkRow<<", "<<checkCol<<endl;
 
         char check_char = cellGrid[checkRow][checkCol]->getCellChar();
         if (check_char == '.' || check_char == '#' || check_char == '+') {
@@ -182,7 +178,6 @@ void Game::notify(int mode, int direction) {
             cellGrid[playerRow][playerCol]->setGameObject(check_char, NULL);
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
-            cout << "Player moved" << endl;
         } else {
             //ActionEvent
             //action->update("You cannot go there.");

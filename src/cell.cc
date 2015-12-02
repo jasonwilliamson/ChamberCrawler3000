@@ -34,7 +34,7 @@ void Cell::moveGameObject(char gameObjectChar, GameObject *gameObj){
 }
 
 void Cell::setDefaultChar(char c){
-    this->defaultChar = c;
+    defaultChar = c;
 }
 
 char Cell::getCellChar() {
@@ -46,11 +46,11 @@ char Cell::getCellChar() {
 }
 
 char Cell::getDefaultChar(){
-    return this->defaultChar;
+    return defaultChar;
 }
 
 GameObject* Cell::getGameObject(){
-    return this->getGameObject();
+    return gameObj;
 }
 
 //will move enemy randomly to // error here will move to any of the 8 blocks surround enemy

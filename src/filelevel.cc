@@ -48,9 +48,9 @@ GameObject* FileLevel::initEnemy(char val){
     return obj;
 }
 
-void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH], Cell* playerCell){
+Cell* FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]){
     char playerChar = '@';
-    
+    Cell* playerCell;
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             char value = fileMap[i][j];
@@ -58,23 +58,24 @@ void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WI
                 value == '#' || value == ' ' || value == '.' ||
                 value == '\\') {
                 cellGrid[i][j]->setDefaultChar(value);
-            }else if (value == playerChar) {
+            } else if (value == playerChar) {
                 playerCell = new Cell(i, j);
                 playerCell->setGameObject(value, initPlayer());
                 cellGrid[i][j]->setGameObject(value, playerCell->getGameObject());
-            }else if (value == '0' || value == '1' || value == '2' ||
-                      value == '3' || value == '4' || value == '5'){
+            } else if (value == '0' || value == '1' || value == '2' ||
+                       value == '3' || value == '4' || value == '5'){
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject('P', initPotion(value, num));
-            }else if (value == '6'|| value == '7' || value == '8' || value == '9'){
+            } else if (value == '6'|| value == '7' || value == '8' || value == '9'){
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject('G', initTreasure(value, num));
-            }else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
-                      value == 'M' || value == 'D' || value == 'L'){
+            } else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
+                       value == 'M' || value == 'D' || value == 'L'){
                 cellGrid[i][j]->setGameObject(value, initEnemy(value));
-            }else{
+            } else{
                 cout << "Error cell value not found!" << endl;
             }
         }
     }
+    return playerCell;
 }

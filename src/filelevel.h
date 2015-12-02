@@ -24,7 +24,7 @@ public:
     //FileLevel(Cell *cellGrid[HEIGHT][WIDTH], char *fileMap[HEIGHT][WIDTH]);
     FileLevel();
     ~FileLevel();
-    void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH], Cell* playerCell);
+    Cell* initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]);
 };
 
 
