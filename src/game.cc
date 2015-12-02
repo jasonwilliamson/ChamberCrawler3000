@@ -77,6 +77,7 @@ void Game::load() {
     if (fromFile) {
         FileLevel level = FileLevel();
         playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
+        setupCellBlockRadii();
     } else {
         //levelCreator->generate(cellGrid);
     }
@@ -89,7 +90,6 @@ void Game::nullCells() {
             cellGrid[r][c] = new Cell(r, c);
         }
     }
-    setupCellBlockRadii();
 }
 
 /*
@@ -109,7 +109,7 @@ void Game::updateEnemy(){
         for (int c = 0; c < WIDTH; c++) {
             //Cell *tmpCell = cellGrid[r][c];
             //Just movement for now
-            char cellChar = cellGrid[r][c]->getCellChar();
+            /*char cellChar = cellGrid[r][c]->getCellChar();
             GameObject* go = cellGrid[r][c]->getGameObject();
             if (eCatalogue.isEnemy(cellChar)) {
                 if (go->getTurnFlag() == false) {
@@ -137,30 +137,27 @@ void Game::updateEnemy(){
                 }
                 go->switchTurnFlag();
             }
+            */
             
-            
-            //check if enemy has had turn
-            /*Cell *tmpCell = cellGrid[r][c];
+ 
+            Cell *tmpCell = cellGrid[r][c];
             GameObject *tmpGObj = tmpCell->getGameObject();
-            if (masterTurnFlag != tmpGObj->getTurnFlag()) {
-                cout << "ue #1" << endl;
+            if (tmpGObj && masterTurnFlag != tmpGObj->getTurnFlag()) {
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
-                    cout << "ue #2" << endl;
                     if(tmpCell->isPlayerWithinBlock()){
                         int enemyAtk = eCatalogue.getAtk(cellChar);
-                        int playerDefense = player->getDef();
+                        //int playerDefense = player->getDef(); //need to setup player here
                         int fiftyFifty;
-                        //50/50 change of enemy attack missing
                         srand( static_cast<unsigned int>(time(NULL)));
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100/100 + playerDefense) * enemyAtk);
-                            player->setDamageHp(damage);
-                            if(player->isSlain()){
-                                cout << "player has been slain" << endl;
-                            }
+                            //int damage = ceil((100/100 + playerDefense) * enemyAtk);
+                            //player->setDamageHp(damage);
+                            //if(player->isSlain()){
+                            //    cout << "player has been slain" << endl;
+                            //}
                             cout << "enemy will attack" << endl;
                         }else{
                             //attack missed
@@ -168,16 +165,15 @@ void Game::updateEnemy(){
                         }
                     }else{
                         //enemy not within one block radius so it must move
-                        cout << "ue #3" << endl;
                         tmpCell->randomizeEnemyMovement();
                     }
                 }
                 //show GameObject has had turn
                 tmpGObj->switchTurnFlag();
-            }*/
+            }
         }
     }
-    //masterTurnFlag = !masterTurnFlag;
+    masterTurnFlag = !masterTurnFlag;
 }
 
 /* Game::notify(mode, direction)

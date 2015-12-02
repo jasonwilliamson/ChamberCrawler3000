@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Cell::Cell(int row, int column):row(row), column(column), gameObj(NULL) {}
+Cell::Cell(int row, int column):row(row), column(column), gameObj(NULL),enemyBlockCount(0),playerBlockCount(0) {}
 
 Cell::~Cell(){
     delete gameObj;
@@ -76,7 +76,6 @@ void Cell::setColumn(int c) {
 //will move enemy randomly within the one block radius of current cell
 void Cell::randomizeEnemyMovement(){
     int possible = 0;
-    cout << "randomizeEnemyMovement: enemyBlockCount " << enemyBlockCount << endl;
     Cell *tmpArr[enemyBlockCount];
     for (int i = 0; i < enemyBlockCount; i++) {
         if (!enemyBlockRadius[i]->gameObj) {
@@ -84,7 +83,6 @@ void Cell::randomizeEnemyMovement(){
             ++possible;
         }
     }
-    cout << "possible count : " << possible << endl;
     int index = 0;
     if (possible != 0) {
         srand( static_cast<unsigned int>(time(NULL)));
@@ -93,7 +91,6 @@ void Cell::randomizeEnemyMovement(){
 
     Cell *target = tmpArr[index];
     target->setGameObject(this->gameObjectChar, this->gameObj);
-    cout << "moving enemy row: " << this->row <<" col: " << this->column << "To row: " << target->row << " col: " << target->column << endl;
     this->gameObj = NULL;
     this->gameObjectChar = ' ';
 }
@@ -101,7 +98,6 @@ void Cell::randomizeEnemyMovement(){
 
 //determines if player is within 1 block radius of cell
 bool Cell::isPlayerWithinBlock(){
-    cout << "Cell:isPlayerWithinBlock playerBlockCount: " << playerBlockCount << endl;
     for (int i = 0; i < playerBlockCount; i++) {
         if (playerBlockRadius[i]->getCellChar() == '@') {
             return true;

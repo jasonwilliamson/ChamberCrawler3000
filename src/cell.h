@@ -20,11 +20,11 @@ private:
     int column;
     char defaultChar;
     char gameObjectChar;
-    int enemyBlockCount;
-    int playerBlockCount;
     Cell *enemyBlockRadius[MAX_NEIGHBOURS];
     Cell *playerBlockRadius[MAX_NEIGHBOURS];
     GameObject *gameObj;
+    int enemyBlockCount;
+    int playerBlockCount;
     
 public:
     Cell(int row, int column);
