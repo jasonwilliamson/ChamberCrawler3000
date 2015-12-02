@@ -5,16 +5,12 @@ OBJECTS = client.o controller.o game.o cell.o display.o enemy.o gameobject.o lev
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
+	cp ../bin/* .
 	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
+	mv *.o *.d cc3k ../bin/
 
 -include ${DEPENDS}
 
 .PHONY: clean
 clean:
 	rm ${OBJECTS} ${EXEC} ${DEPENDS}	
-
-git:
-	mv *.o *.d cc3k ../bin/
-
-ungit:
-	cp ../bin/* .
