@@ -89,9 +89,7 @@ void Controller::play() {
                 } else {
                     int dir = direction(input);
                     if (dir != 0) {
-                        //Requires Game implementation
-                        //game->notify(USE, dir);
-                        //TESTING
+                        game->notify(USE, dir);
                         updateDisplay();
                     } else {
                         display->draw(-2);
@@ -105,9 +103,7 @@ void Controller::play() {
                 } else {
                     int dir = direction(input);
                     if (dir != 0) {
-                        //Requires Game implementation
-                        //game->notify(ATTACK, dir);
-                        //TESTING
+                        game->notify(ATTACK, dir);
                         updateDisplay();
                     } else {
                         display->draw(-2);
@@ -116,9 +112,7 @@ void Controller::play() {
             } else {
                 int dir = direction(cmd);
                 if (dir != 0) {
-                    //Requires Game implementation
-                    //game->notify(MOVE, dir);
-                    //TESTING
+                    game->notify(MOVE, dir);
                     updateDisplay();
                 } else {
                     display->draw(-2);

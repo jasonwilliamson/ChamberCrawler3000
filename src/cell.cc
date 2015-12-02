@@ -100,3 +100,19 @@ void Cell::addNeighbourBlock(Cell *block){
         ++playerBlockCount;
     }
 }
+
+int Cell::getRow() {
+    return row;
+}
+
+int Cell::getColumn() {
+    return column;
+}
+
+void Cell::setRow(int r) {
+    row = r;
+}
+
+void Cell::setColumn(int c) {
+    column = c;
+}

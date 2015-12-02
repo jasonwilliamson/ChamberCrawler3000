@@ -17,7 +17,7 @@
 class Level{
 public:
     virtual ~Level();
-    virtual void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]) = 0;
+    virtual void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH], Cell* playerCell) = 0;
 };
 
 #endif

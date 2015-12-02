@@ -12,7 +12,7 @@
 #define ATK 25
 #define DEF 25
 
-Shade::Shade():Player(HP,ATK,DEF){}
+Shade::Shade():Player(HP,ATK,DEF, "Shade") {}
 
 Shade::~Shade(){}
 

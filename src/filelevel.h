@@ -11,9 +11,6 @@
 
 #include "level.h"
 #include "constants.h"
-#include "cell.h"
-//#include "floor.h"
-//#include "charboard.h"
 
 class FileLevel: public Level{
 private:
@@ -27,7 +24,7 @@ public:
     //FileLevel(Cell *cellGrid[HEIGHT][WIDTH], char *fileMap[HEIGHT][WIDTH]);
     FileLevel();
     ~FileLevel();
-    void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]);
+    void initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH], Cell* playerCell);
 };
 
 

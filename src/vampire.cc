@@ -8,7 +8,7 @@
 #define ATK 25
 #define DEF 25
 
-Vampire::Vampire():Player(HP,ATK,DEF){}
+Vampire::Vampire():Player(HP,ATK,DEF, "Vampire"){}
 
 Vampire::~Vampire(){}
 

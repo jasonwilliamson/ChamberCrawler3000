@@ -12,7 +12,8 @@
 #include "player.h"
 #include "booster.h"
 
-Player::Player(int hp, int atk, int def):Character(hp, atk, def){
+Player::Player(int hp, int atk, int def, std::string race)
+    :Character(hp, atk, def), race(race) {
     this->activePotions = new Booster();
 }
 
@@ -20,3 +21,6 @@ Player::~Player(){
     delete this->activePotions;
 }
 
+std::string Player::getRace() {
+    return race;
+}

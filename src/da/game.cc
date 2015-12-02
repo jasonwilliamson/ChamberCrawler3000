@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cstdlib>
-#include <math.h>
 #include "game.h"
 #include "level.h"
 #include "filelevel.h"
@@ -93,16 +91,6 @@ void Game::nullCells() {
     setupCellBlockRadii();
 }
 
-/*
- int iSecret, iGuess;
- 
- //initialize random seed:
-srand (time(NULL));
-
-// generate secret number between 1 and 10:
-iSecret = rand() % 10 + 1;
-
- */
 
 //update cells ENEMIES TURN
 void Game::updateEnemy(){
@@ -115,29 +103,18 @@ void Game::updateEnemy(){
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
                     if(tmpCell->isPlayerWithinBlock()){
-                        int enemyAtk = eCatalogue.getAtk(cellChar);
-                        int playerDefense = player->getDef();
-                        int fiftyFifty;
-                        //50/50 change of enemy attack missing
-                        srand( static_cast<unsigned int>(time(NULL)));
-                        fiftyFifty = rand() % 2 + 1;
-                        if (1 == fiftyFifty) {
-                            //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100/100 + playerDefense) * enemyAtk);
-                            player->setDamageHp(damage);
-                            if(player->isSlain()){
-                                cout << "player has been slain" << endl;
-                            }
-                        }else{
-                            //attack missed
-                            cout << "enemies attack missed" << endl;
-                        }
+                        //int enemyAtk = eCatalogue.getAtk(cellChar);
+                    
+                        //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
+                    
                     }else{
-                        //enemy not within one block radius so it must move
-                        tmpCell->randomizeEnemyMovement();
+                        //update -> check if player is within one block radious of this enemy
+                        //       (if yes attack)
+                        //  otherwise -> check for valid move posibilities , randomize, then move..
+                        // set turnflag
                     }
                 }
-                //show GameObject has had turn
+                //switch all cells
                 tmpCell->getGameObject()->switchTurnFlag();
             }
         }

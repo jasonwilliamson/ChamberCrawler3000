@@ -8,7 +8,7 @@
 #define ATK 25
 #define DEF 15
 
-Drow::Drow():Player(HP,ATK,DEF){}
+Drow::Drow():Player(HP,ATK,DEF, "Drow"){}
 
 Drow::~Drow(){}
 

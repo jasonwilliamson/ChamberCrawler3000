@@ -8,9 +8,6 @@
 
 #include <iostream>
 #include "filelevel.h"
-#include "cell.h"
-//#include "floor.h"
-//#include "charboard.h"
 #include "shade.h"
 #include "potion.h"
 #include "treasure.h"
@@ -51,7 +48,7 @@ GameObject* FileLevel::initEnemy(char val){
     return obj;
 }
 
-void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]){
+void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH], Cell* playerCell){
     char playerChar = '@';
     
     for (int i = 0; i < HEIGHT; i++) {
@@ -62,7 +59,9 @@ void FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WI
                 value == '\\') {
                 cellGrid[i][j]->setDefaultChar(value);
             }else if (value == playerChar) {
-                cellGrid[i][j]->setGameObject(value, initPlayer());
+                playerCell = new Cell(i, j);
+                playerCell->setGameObject(value, initPlayer());
+                cellGrid[i][j]->setGameObject(value, playerCell->getGameObject());
             }else if (value == '0' || value == '1' || value == '2' ||
                       value == '3' || value == '4' || value == '5'){
                 int num = value - '0';

@@ -12,7 +12,7 @@
 #define ATK 15
 #define DEF 20
 
-Goblin::Goblin():Player(HP,ATK,DEF){}
+Goblin::Goblin():Player(HP,ATK,DEF, "Goblin"){}
 
 Goblin::~Goblin(){}
 
