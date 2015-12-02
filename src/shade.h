@@ -8,7 +8,7 @@
 #include "gameobject.h"
 #include "player.h"
 
-class Shade : public Player{
+class Shade : public Player {
   public:
     Shade();
     ~Shade();

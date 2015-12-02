@@ -5,6 +5,12 @@
 #include "level.h"
 #include "filelevel.h"
 #include "cell.h"
+#include "player.h"
+#include "shade.h"
+#include "drow.h"
+#include "vampire.h"
+#include "goblin.h"
+#include "troll.h"
 
 using namespace std;
 
@@ -265,20 +271,24 @@ Player* Game::getPlayer() {
  *   begin generating the floor
  */
 void Game::setPlayer(int race) {
-    /*
     if (player) {
         delete player;
     }
     if (race == SHADE) {
         player = new Shade();
     } else if (race == DROW) {
-        player = new Drow();
+        //player = new Drow();
+        player = new Shade();
     } else if (race == VAMPIRE) {
-        player = new Vampire();
+        //player = new Vampire();
+        player = new Shade();
     } else if (race == TROLL) {
-        player = new Troll();
+        //player = new Troll();
+        player = new Shade();
+    } else if (race == GOBLIN) {
+        //player = new Goblin();
+        player = new Shade();
     }
-    */
 }
 
 void Game::setPlayer(Player *p) {

@@ -4,8 +4,12 @@
 #include "display.h"
 #include "cell.h"
 #include "enemycatalogue.h"
+#include "actionevent.h"
+#include "gameobject.h"
+#include "player.h"
 
 class Game {
+    ActionEvent* actionEvent;
     Player* player;   
     Display* display;
     Level *levelCreator;

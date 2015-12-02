@@ -12,7 +12,7 @@
 #include "gameobject.h"
 #include "player.h"
 
-class Vampire: public Player{
+class Vampire : public Player {
   public:
     Vampire();
     ~Vampire();

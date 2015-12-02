@@ -149,7 +149,7 @@ void Controller::updateDisplay() {
                 game->getPlayerCell()->getColumn(),
                 game->getPlayerCell()->getCellChar());
     } else {
-        //cout << "Player not initialized" << endl;
+        cout << "Player not initialized" << endl;
     }
 }
 

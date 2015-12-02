@@ -23,8 +23,8 @@ FileLevel::FileLevel(){}
 FileLevel::~FileLevel(){}
 
 GameObject* FileLevel::initPlayer(){
-    GameObject *obj = new Shade();
-    return obj;
+    //initPlayer returns NULL
+    return NULL;
 }
 
 //TODO remove char val ..not necessary

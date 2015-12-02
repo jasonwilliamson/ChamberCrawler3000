@@ -25,7 +25,7 @@ class Player : public Character {
 
   public:
     Player(int hp, int atk, int def, std::string race);
-    virtual ~Player();
+    ~Player();
     virtual void move(char dir) = 0;
     virtual void use(Potion* p) = 0;
     virtual void use(Treasure* g) = 0;
