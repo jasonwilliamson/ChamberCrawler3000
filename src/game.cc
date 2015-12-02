@@ -83,6 +83,8 @@ void Game::load() {
     if (fromFile) {
         FileLevel level = FileLevel();
         playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
+        playerCell->setGameObject('@', player);
+        cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
         setupCellBlockRadii();
     } else {
         //levelCreator->generate(cellGrid);

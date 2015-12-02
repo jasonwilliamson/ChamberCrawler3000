@@ -9,7 +9,7 @@
 
 #include "character.h"
 
-Character::Character(int hp, int atk, int def):hp(hp), atk(atk), def(def){}
+Character::Character(int hp, int atk, int def):hp(hp), atk(atk), def(def), gold(0){}
 
 Character::~Character(){}
 
