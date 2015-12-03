@@ -15,6 +15,7 @@ class Display {
     void draw(int state);
     void updateMap(int row, int col, char cell);
     void updateCharacter(std::string race, int gold, int hp, int atk, int def);
+    void updateAction(std::string action);
 };
 
 #endif

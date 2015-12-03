@@ -1,17 +1,25 @@
-#ifndef ACTIONEVENT_H
-#define ACTIONEVENT_H
+#include <iostream>
 #include <string>
+#include "actionevent.h"
 
-class ActionEvent {
-    std::string event;
+ActionEvent::ActionEvent() {
+}
 
-  public:
-    ActionEvent();
-    ~ActionEvent();
-    void setEvent(std::string);
-    void addEvent(std::string);
-    void clearEvent();
-    std::string getEvent();
-};
+ActionEvent::~ActionEvent() {}
 
-#endif
+void ActionEvent::setEvent(std::string e) {
+    event = e;
+}
+
+void ActionEvent::addEvent(std::string e) {
+    event = event + " " + e;
+}
+
+
+void ActionEvent::clearEvent() {
+    event = "";
+}
+
+std::string ActionEvent::getEvent() {
+    return event;
+}

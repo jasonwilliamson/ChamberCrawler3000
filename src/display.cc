@@ -17,7 +17,7 @@ void Display::draw(int state) {
         cout << "Select a race or enter (q) to quit" << endl;
         cout << "(s)hade, (d)row, (v)ampire, (g)oblin, (t)roll: ";
     } else if (state == PLAY) {
-        
+
         for (int r = 0; r < HEIGHT; r++) { 
             for (int c = 0; c < WIDTH; c++) {
                 cout << grid[r][c];
@@ -28,7 +28,7 @@ void Display::draw(int state) {
         cout << "HP: " << hp << endl;
         cout << "ATK: " << atk << endl;
         cout << "DEF: " << def << endl;
-        cout << "Action: " << endl;
+        cout << "Action: " << action << endl;
     }
 }
 
@@ -42,4 +42,8 @@ void Display::updateCharacter(string race, int gold, int hp, int atk, int def) {
     this->hp = hp;
     this->atk = atk;
     this->def = def;
+}
+
+void Display::updateAction(string action) {
+    this->action = action;
 }

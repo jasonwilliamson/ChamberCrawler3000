@@ -41,6 +41,8 @@ class Game {
     Player* getPlayer();
     void setPlayer(int race);
     void setPlayer(Player* p);
+    ActionEvent* getActionEvent();
+    void setActionEvent(ActionEvent* ae);
 };
 
 #endif

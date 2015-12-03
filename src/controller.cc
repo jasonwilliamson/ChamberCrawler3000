@@ -75,6 +75,7 @@ void Controller::play() {
                 }
                 game->load();
                 game->setState(PLAY);
+                game->getActionEvent()->setEvent("You awaken in a cold, dark chamber.");
                 updateDisplay();
             } else {
                 display->draw(-2);
@@ -130,6 +131,7 @@ void Controller::play() {
                 rep = 1;
             }
         }
+        game->getActionEvent()->clearEvent();
     }
 }
 
@@ -148,6 +150,7 @@ void Controller::updateDisplay() {
         display->updateMap(game->getPlayerCell()->getRow(),
                 game->getPlayerCell()->getColumn(),
                 game->getPlayerCell()->getCellChar());
+        display->updateAction(game->getActionEvent()->getEvent());
     } else {
         cout << "Player not initialized" << endl;
     }
@@ -163,14 +166,32 @@ void Controller::updateDisplay() {
  *
  * string -> int
  */
-int direction(string input) {
-    if (input == "nw") { return 1; }
-    else if (input == "no") { return 2; }
-    else if (input == "ne") { return 3; }
-    else if (input == "we") { return 4; }
-    else if (input == "ea") { return 5; }
-    else if (input == "sw") { return 6; }
-    else if (input == "so") { return 7; }
-    else if (input == "se") { return 8; }
-    else { return 0; }
+int Controller::direction(string input) {
+    if (input == "nw") { 
+        game->getActionEvent()->setEvent("You move north-west.");
+        return 1; 
+    } else if (input == "no") { 
+        game->getActionEvent()->setEvent("You move north.");
+        return 2; 
+    } else if (input == "ne") { 
+        game->getActionEvent()->setEvent("You move north-east.");
+        return 3; 
+    } else if (input == "we") { 
+        game->getActionEvent()->setEvent("You move west.");
+        return 4; 
+    } else if (input == "ea") { 
+        game->getActionEvent()->setEvent("You move east.");
+        return 5; 
+    } else if (input == "sw") { 
+        game->getActionEvent()->setEvent("You move south-west.");
+        return 6; 
+    } else if (input == "so") { 
+        game->getActionEvent()->setEvent("You move south.");
+        return 7; 
+    } else if (input == "se") { 
+        game->getActionEvent()->setEvent("You move south-east.");
+        return 8; 
+    } else { 
+        return 0; 
+    }
 }

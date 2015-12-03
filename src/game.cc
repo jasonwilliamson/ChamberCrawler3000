@@ -19,6 +19,7 @@ Game::Game():gamestate(0), curFloor(1) {
     fromFile = false;
     playerCell = NULL;
     masterTurnFlag = true;
+    actionEvent = new ActionEvent();
 }
 
 /* Game(filedata)
@@ -37,6 +38,7 @@ Game::Game(char data[HEIGHT * 5][WIDTH]):gamestate(0), curFloor(1) {
     fromFile = true;
     playerCell = NULL;
     masterTurnFlag = true;
+    actionEvent = new ActionEvent();
 }
 
 Game::~Game() {}
@@ -152,6 +154,7 @@ void Game::updateEnemy(){
     masterTurnFlag = !masterTurnFlag;
 }
 
+
 /* Game::notify(mode, direction)
  * Based on mode, tells the Player to perform an action (MOVE, USE, ATTACK)
  *   in the specified direction
@@ -263,4 +266,12 @@ void Game::setPlayer(int race) {
 
 void Game::setPlayer(Player *p) {
     player = p;
+}
+
+ActionEvent* Game::getActionEvent() {
+    return actionEvent;
+}
+
+void Game::setActionEvent(ActionEvent* ae) {
+    actionEvent = ae;
 }
