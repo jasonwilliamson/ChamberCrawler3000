@@ -18,19 +18,20 @@
 
 class Player : public Character {
   private:
-//    const char displayChar;
     const std::string race;
+
   protected:
     Booster *activePotions;
 
   public:
     Player(int hp, int atk, int def, std::string race);
     ~Player();
-    virtual void move(char dir) = 0;
-    virtual void use(Potion* p) = 0;
-    void use(Treasure* g);
+    std::string use(Potion* p);
+    std::string use(Treasure* t);
     std::string getRace();
-//    char getDisplayChar();
+    int getBoosterAtk();
+    int getBoosterDef();
+    void resetBooster();
 };
 
 #endif 

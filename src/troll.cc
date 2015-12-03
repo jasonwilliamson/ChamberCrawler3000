@@ -12,10 +12,6 @@ Troll::Troll():Player(HP,ATK,DEF, "Troll") {}
 
 Troll::~Troll(){}
 
-void Troll::move(char dir){
-    
-}
-
 void Troll::use(Potion* p) {
     
 }

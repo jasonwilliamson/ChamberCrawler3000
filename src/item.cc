@@ -1,13 +1,21 @@
-//
-//  item.cpp
-//  loadingFromFile
-//
-//  Created by Jason Williamson on 2015-11-29.
-//  Copyright © 2015 Jason Williamson. All rights reserved.
-//
-
 #include "item.h"
 
-Item::Item(int value):GameObject(value) {}
+Item::Item(int value, int type):value(value), type(type) {}
 
 Item::~Item(){}
+
+void Item::setValue(int v) {
+    value = v;
+}
+
+int Item::getValue() {
+    return value;
+}
+
+void Item::setType(int t) {
+    type = t;
+}
+
+int Item::getType() {
+    return type;
+}

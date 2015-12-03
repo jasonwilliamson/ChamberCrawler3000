@@ -12,10 +12,6 @@ Shade::Shade():Player(HP,ATK,DEF, "Shade") {}
 
 Shade::~Shade(){}
 
-void Shade::move(char dir){
-    
-}
-
 void Shade::use(Potion* p) {
     
 }

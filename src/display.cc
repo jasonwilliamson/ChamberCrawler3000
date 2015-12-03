@@ -14,17 +14,17 @@ void Display::draw(int state) {
         cout << "That is not a valid command" << endl;  
     } else if (state == MENU) {
         cout << endl << endl;
-cout << "  ,  /\\  .  " << endl;
-cout << " //`-||-'\\\\ " << endl;
-cout << "(| -=||=- |)    Welcome to ChamberCrawler 3000!" << endl;
-cout << " \\\\,-||-.// " << endl;
-cout << "  `  ||  '     " << endl;
-cout << "     ||         Select your race:" << endl;
-cout << "     ||             - (s)hade" << endl;
-cout << "     ||             - (d)row" << endl;
-cout << "     ||             - (v)ampire" << endl;
-cout << "     ||             - (g)oblin" << endl;
-cout << "     ()             - (t)roll" << endl << endl;;
+cout << "  ,  /\\  .                                          ." << endl;
+cout << " //`-||-'\\\\                                        / \\" << endl;
+cout << "(| -=||=- |)    Welcome to ChamberCrawler 3000!    | |" << endl;
+cout << " \\\\,-||-.//                                        | |" << endl;
+cout << "  `  ||  '                                         |.|" << endl;
+cout << "     ||           Select your race:                |.|" << endl;
+cout << "     ||               - (s)hade                    |:|" << endl;
+cout << "     ||               - (d)row                     |:|" << endl;
+cout << "     ||               - (v)ampire                `--8--'" << endl;
+cout << "     ||               - (g)oblin                    8" << endl;
+cout << "     ()               - (t)roll                     O" << endl << endl;;
 } else if (state == PLAY) {
 
         for (int r = 0; r < HEIGHT; r++) { 

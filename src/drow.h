@@ -12,7 +12,6 @@ class Drow : public Player {
   public:
     Drow();
     ~Drow();
-    void move(char dir);
     void use(Potion* p);
     void use(Treasure* g);
 };

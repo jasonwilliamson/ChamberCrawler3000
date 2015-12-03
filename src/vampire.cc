@@ -12,10 +12,6 @@ Vampire::Vampire():Player(HP,ATK,DEF, "Vampire"){}
 
 Vampire::~Vampire(){}
 
-void Vampire::move(char dir){
-    
-}
-
 void Vampire::use(Potion* p) {
 
 }

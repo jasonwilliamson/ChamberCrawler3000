@@ -1,25 +1,15 @@
-//
-//  potion.hpp
-//  loadingFromFile
-//
-//  Created by Jason Williamson on 2015-11-29.
-//  Copyright © 2015 Jason Williamson. All rights reserved.
-//
-
-#ifndef potion_hpp
-#define potion_hpp
+#ifndef POTION_H
+#define POTION_H
 
 #include "item.h"
+#include "constants.h"
 
 class Potion : public Item {
   private:
-    int potionType;
+
   public:
-    Potion(char val, int potionType);
+    Potion(int value, int type);
     ~Potion();
-    //void use(Player& player);
-    void setType(int potionType);
-    int getType();
 };
 
-#endif /* potion_hpp */
+#endif

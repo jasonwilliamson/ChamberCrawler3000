@@ -9,24 +9,6 @@
 #include "potion.h"
 #include "item.h"
 
-#define RH = 0
-#define BA = 1
-#define BD = 2
-#define PH = 3
-#define WA = 4
-#define WD = 5
-
-Potion::Potion(char val, int potionType):Item(val), potionType(potionType){}
+Potion::Potion(int value, int type):Item(value, type) {}
 
 Potion::~Potion(){}
-
-//void Potion::use(Player& player){}
-
-void Potion::setType(int potionType){
-    this->potionType = potionType;
-}
-
-int Potion::getType(){
-    return this->potionType;
-}
-
