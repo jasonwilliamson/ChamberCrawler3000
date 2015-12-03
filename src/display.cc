@@ -13,10 +13,19 @@ void Display::draw(int state) {
     } else if (state == -2) {
         cout << "That is not a valid command" << endl;  
     } else if (state == MENU) {
-        cout << "Welcome to ChamberCrawler 3000!" << endl;
-        cout << "Select a race or enter (q) to quit" << endl;
-        cout << "(s)hade, (d)row, (v)ampire, (g)oblin, (t)roll: ";
-    } else if (state == PLAY) {
+        cout << endl << endl;
+cout << "  ,  /\\  .  " << endl;
+cout << " //`-||-'\\\\ " << endl;
+cout << "(| -=||=- |)    Welcome to ChamberCrawler 3000!" << endl;
+cout << " \\\\,-||-.// " << endl;
+cout << "  `  ||  '     " << endl;
+cout << "     ||         Select your race:" << endl;
+cout << "     ||             - (s)hade" << endl;
+cout << "     ||             - (d)row" << endl;
+cout << "     ||             - (v)ampire" << endl;
+cout << "     ||             - (g)oblin" << endl;
+cout << "     ()             - (t)roll" << endl << endl;;
+} else if (state == PLAY) {
 
         for (int r = 0; r < HEIGHT; r++) { 
             for (int c = 0; c < WIDTH; c++) {
@@ -24,7 +33,7 @@ void Display::draw(int state) {
             }
             cout << endl;
         }
-        cout << "Race: " << race << " Gold: " << gold << endl;
+        cout << "Race: " << race << "    Gold: " << gold << endl;
         cout << "HP: " << hp << endl;
         cout << "ATK: " << atk << endl;
         cout << "DEF: " << def << endl;

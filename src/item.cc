@@ -8,6 +8,6 @@
 
 #include "item.h"
 
-Item::Item(char value):value(value){}
+Item::Item(int value):GameObject(value) {}
 
 Item::~Item(){}

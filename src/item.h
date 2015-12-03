@@ -12,10 +12,8 @@
 #include "gameobject.h"
 
 class Item: public GameObject{
-private:
-    char value;
 public:
-    Item(char value);
+    Item(int value);
     virtual ~Item();
 };
 

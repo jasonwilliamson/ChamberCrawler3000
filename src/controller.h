@@ -19,7 +19,7 @@ class Controller {
 
     void play();
     void updateDisplay();
-    int direction(std::string input);
+    int direction(std::string input, int mode);
 };
 
 

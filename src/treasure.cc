@@ -9,15 +9,14 @@
 #include "treasure.h"
 #include "item.h"
 
-Treasure::Treasure(char val, int treasureType):Item(val), treasureType(treasureType){}
+Treasure::Treasure(int val, int type):Item(val), treasureType(type) {}
 
 Treasure::~Treasure(){}
 
-int Treasure::getValue(){
-    return this->treasureType;
-}
-
 bool Treasure::isDragonHoard(){
-    //TO DO check type
-    return false;
+    if (treasureType == 2) {
+        return true;
+    } else {
+        return false;
+    }
 }

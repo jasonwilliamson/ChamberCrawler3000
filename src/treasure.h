@@ -13,9 +13,8 @@
 
 class Treasure: public Item{
 public:
-    Treasure(char val, int treasureType);
+    Treasure(int val, int type);
     ~Treasure();
-    int getValue();
     bool isDragonHoard();
 private:
     int treasureType;

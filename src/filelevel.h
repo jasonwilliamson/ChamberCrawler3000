@@ -18,7 +18,7 @@ private:
     //char *fileMap[HEIGHT][WIDTH];
     GameObject * initPlayer();
     GameObject * initPotion(char val, int potionType);
-    GameObject * initTreasure(char val, int treasureType);
+    GameObject * initTreasure(int val, int type);
     GameObject * initEnemy(char val);
 public:
     //FileLevel(Cell *cellGrid[HEIGHT][WIDTH], char *fileMap[HEIGHT][WIDTH]);

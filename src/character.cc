@@ -61,3 +61,7 @@ void Character::setDef(int def) {
 void Character::setGold(int gold) {
     this->gold = gold;
 }
+
+void Character::addGold(int gold) {
+    this->gold += gold;
+}

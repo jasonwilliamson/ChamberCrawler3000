@@ -163,11 +163,9 @@ void Game::updateEnemy(){
  */
 void Game::notify(int mode, int direction) {
     if (mode == USE) {
-        cout << "Item used" << endl;
-        //use item in direction dir
+        actionEvent->setEvent("You use a potion.");
     } else if (mode == ATTACK) {
-        cout << "ATTACK!" << endl;
-        //attack in direction dir
+        actionEvent->setEvent("You attack.");
     } else if (mode == MOVE) {
         int playerRow = playerCell->getRow();
         int playerCol = playerCell->getColumn();
@@ -192,9 +190,15 @@ void Game::notify(int mode, int direction) {
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
+        } else if (check_char == 'G') {
+            player->addGold(cellGrid[checkRow][checkCol]->getGameObject()->getValue());
+            cellGrid[checkRow][checkCol]->setGameObject('@', cellGrid[playerRow][playerCol]->getGameObject());
+            cellGrid[playerRow][playerCol]->removeGameObject();
+            playerCell->setRow(checkRow);
+            playerCell->setColumn(checkCol);
+            updateEnemy();
         } else {
-            //ActionEvent
-            //action->update("You cannot go there.");
+            actionEvent->setEvent("You can't move there.");
         }
     }
 }
@@ -251,17 +255,13 @@ void Game::setPlayer(int race) {
     if (race == SHADE) {
         player = new Shade();
     } else if (race == DROW) {
-        //player = new Drow();
-        player = new Shade();
+        player = new Drow();
     } else if (race == VAMPIRE) {
-        //player = new Vampire();
-        player = new Shade();
+        player = new Vampire();
     } else if (race == TROLL) {
-        //player = new Troll();
-        player = new Shade();
+        player = new Troll();
     } else if (race == GOBLIN) {
-        //player = new Goblin();
-        player = new Shade();
+        player = new Goblin();
     }
 }
 
