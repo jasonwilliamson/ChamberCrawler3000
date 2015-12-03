@@ -123,15 +123,15 @@ void Game::updateEnemy(){
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
                     if(tmpCell->isPlayerWithinBlock()){
-                        int enemyAtk = eCatalogue.getAtk(cellChar);
-                        int playerDefense = player->getDef(); //need to setup player here
+                        float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
+                        float playerDefense = static_cast<float>(player->getDef()); //need to setup player here
                         int fiftyFifty;
                         srand( static_cast<unsigned int>(time(NULL)));
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100/(100 + playerDefense)) * enemyAtk);
-                            cout << "damage: " << damage << "enemyAtk " << enemyAtk << endl;
+                            int damage = ceil((100.00/(100.00 + playerDefense)) * enemyAtk);
+                            cout << "damage: " << damage << " playDefense " << playerDefense << " enemyAtk " << enemyAtk << endl;
                             player->setDamageHp(damage);
                             if(player->isSlain()){
                                 cout << "player has been slain" << endl;
@@ -153,6 +153,7 @@ void Game::updateEnemy(){
     }
     masterTurnFlag = !masterTurnFlag;
 }
+
 
 
 /* Game::notify(mode, direction)
