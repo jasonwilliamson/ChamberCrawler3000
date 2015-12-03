@@ -33,8 +33,9 @@ GameObject* FileLevel::initPotion(char val, int potionType){
     return obj;
 }
 
-GameObject* FileLevel::initTreasure(char val, int treasureType){
-    GameObject *obj = new Treasure(val, treasureType);
+GameObject* FileLevel::initTreasure(int val, int type){
+    cout << "This treasure has value " << val << " filelevel.cc:37"<< endl; //REMOVE
+    GameObject *obj = new Treasure(val, type);
     return obj;
 }
 
@@ -68,9 +69,23 @@ Cell* FileLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][W
                 int num = value - '0';
                 cellGrid[i][j]->setGameObject('P', initPotion(value, num));
                 cellGrid[i][j]->setDefaultChar('.');
+                //2, 1, 4, 6
             } else if (value == '6'|| value == '7' || value == '8' || value == '9'){
-                int num = value - '0';
-                cellGrid[i][j]->setGameObject('G', initTreasure(value, num));
+                int size = 0, type = 0;
+                if (value == '6') {
+                    size = 2;
+                    type = 0;
+                } else if (value == '7') {
+                    size = 1;
+                    type = 0;
+                } else if (value == '8') {
+                    size = 4;
+                    type = 1;
+                } else if (value == '9') {
+                    size = 6;
+                    type = 2;
+                }
+                cellGrid[i][j]->setGameObject('G', initTreasure(size, type));
                 cellGrid[i][j]->setDefaultChar('.');
             } else if (value == 'H' || value == 'W' || value =='E' || value == 'O'||
                        value == 'M' || value == 'D' || value == 'L'){

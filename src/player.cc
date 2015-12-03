@@ -25,7 +25,6 @@ std::string Player::getRace() {
     return race;
 }
 
-/*
-char Player::getDisplayChar() {
-    return displayChar;
-}*/
+void use(Treasure *t) {
+    std::cout << "This is me using treasure" << std::endl;
+}

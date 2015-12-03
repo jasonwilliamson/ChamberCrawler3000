@@ -90,12 +90,11 @@ void Controller::play() {
                 if (cin.fail()) {
                     break;
                 } else {
-                    int dir = direction(input);
+                    int dir = direction(input, USE);
                     if (dir != 0) {
                         game->notify(USE, dir);
-                        updateDisplay();
                     } else {
-                        display->draw(-2);
+                        game->getActionEvent()->setEvent("That is not a valid action");
                     }
                 }
             } else if (cmd == "a") {
@@ -104,12 +103,11 @@ void Controller::play() {
                 if (cin.fail()) {
                     break;
                 } else {
-                    int dir = direction(input);
+                    int dir = direction(input, ATTACK);
                     if (dir != 0) {
                         game->notify(ATTACK, dir);
-                        updateDisplay();
                     } else {
-                        display->draw(-2);
+                        game->getActionEvent()->setEvent("That is not a valid action");
                     }
                 }
             } else {
@@ -120,16 +118,17 @@ void Controller::play() {
                     rep = 1;
                 }
                 for (int i = 0 ; i < rep; i++) {
-                    int dir = direction(cmd);
+                    game->getActionEvent()->setEvent("You move");
+                    int dir = direction(cmd, MOVE);
                     if (dir != 0) {
                         game->notify(MOVE, dir);
-                        updateDisplay();
                     } else {
-                        display->draw(-2);
+                        game->getActionEvent()->setEvent("That is not a valid action");
                     }
                 }
                 rep = 1;
             }
+            updateDisplay();
         }
         game->getActionEvent()->clearEvent();
     }
@@ -166,30 +165,46 @@ void Controller::updateDisplay() {
  *
  * string -> int
  */
-int Controller::direction(string input) {
+int Controller::direction(string input, int mode) {
     if (input == "nw") { 
-        game->getActionEvent()->setEvent("You move north-west.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("north-west.");
+        }
         return 1; 
     } else if (input == "no") { 
-        game->getActionEvent()->setEvent("You move north.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("north.");
+        }
         return 2; 
     } else if (input == "ne") { 
-        game->getActionEvent()->setEvent("You move north-east.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("north-east.");
+        }
         return 3; 
     } else if (input == "we") { 
-        game->getActionEvent()->setEvent("You move west.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("west.");
+        }
         return 4; 
     } else if (input == "ea") { 
-        game->getActionEvent()->setEvent("You move east.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("east.");
+        }
         return 5; 
     } else if (input == "sw") { 
-        game->getActionEvent()->setEvent("You move south-west.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("south-west.");
+        }
         return 6; 
     } else if (input == "so") { 
-        game->getActionEvent()->setEvent("You move south.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("south.");
+        }
         return 7; 
     } else if (input == "se") { 
-        game->getActionEvent()->setEvent("You move south-east.");
+        if (mode == MOVE) {
+            game->getActionEvent()->addEvent("south-east.");
+        }
         return 8; 
     } else { 
         return 0; 

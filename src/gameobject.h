@@ -11,14 +11,19 @@
 #define gameobject_hpp
 
 class GameObject{
+  private:
+    int value;
+
   protected:
     bool turnFlag;
 
   public:
-    GameObject();
+    GameObject(int value = 0);
     virtual ~GameObject();
     bool getTurnFlag();
     void switchTurnFlag();
+    int getValue();
+    void setValue(int value);
 //    virtual char getDisplayChar() = 0;
 };
 #endif

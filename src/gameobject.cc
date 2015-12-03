@@ -9,7 +9,7 @@
 
 #include "gameobject.h"
 
-GameObject::GameObject():turnFlag(false){}
+GameObject::GameObject(int value):value(value), turnFlag(false){}
 
 GameObject::~GameObject(){}
 
@@ -21,4 +21,10 @@ void GameObject::switchTurnFlag(){
     this->turnFlag = !this->turnFlag;
 }
 
+void GameObject::setValue(int value) {
+    this->value = value;
+}
 
+int GameObject::getValue() {
+    return value;
+}
