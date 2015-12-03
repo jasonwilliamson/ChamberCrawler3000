@@ -83,7 +83,7 @@ void Game::setupCellBlockRadii(){
  */
 void Game::load() {
     if (fromFile) {
-        FileLevel level = FileLevel();
+        FileLevel level;
         playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
         playerCell->setGameObject('@', player);
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
@@ -161,43 +161,55 @@ void Game::updateEnemy(){
  * int, int -> void
  */
 void Game::notify(int mode, int direction) {
+    int playerRow = playerCell->getRow();
+    int playerCol = playerCell->getColumn();
+    int checkRow = playerRow, checkCol = playerCol;
+
+    if (direction == 1 || direction == 2 || direction == 3) {
+        checkRow--;
+    }
+    if (direction == 1 || direction == 4 || direction == 6) {
+        checkCol--;
+    }
+    if (direction == 6 || direction == 7 || direction == 8) {
+        checkRow++;
+    }
+    if (direction == 3 || direction == 5 || direction == 8) {
+        checkCol++;
+    }
+
+    char check_char = cellGrid[checkRow][checkCol]->getCellChar();
+    
     if (mode == USE) {
-        actionEvent->setEvent("You use a potion.");
+        if (check_char == 'P') {
+            GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
+            actionEvent->setEvent(player->use(dynamic_cast<Potion*>(go)));
+            delete go;
+            cellGrid[checkRow][checkCol]->removeGameObject();
+        } else {
+            actionEvent->setEvent("There is nothing here to use.");
+        }
     } else if (mode == ATTACK) {
         actionEvent->setEvent("You attack.");
     } else if (mode == MOVE) {
-        int playerRow = playerCell->getRow();
-        int playerCol = playerCell->getColumn();
-        int checkRow = playerRow, checkCol = playerCol;
-        if (direction == 1 || direction == 2 || direction == 3) {
-            checkRow--;
-        }
-        if (direction == 1 || direction == 4 || direction == 6) {
-            checkCol--;
-        }
-        if (direction == 6 || direction == 7 || direction == 8) {
-            checkRow++;
-        }
-        if (direction == 3 || direction == 5 || direction == 8) {
-            checkCol++;
-        }
-
-        char check_char = cellGrid[checkRow][checkCol]->getCellChar();
         if (check_char == '.' || check_char == '#' || check_char == '+') {
-            cellGrid[checkRow][checkCol]->setGameObject('@', cellGrid[playerRow][playerCol]->getGameObject());
+            cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
         } else if (check_char == 'G') {
-            player->addGold(cellGrid[checkRow][checkCol]->getGameObject()->getValue());
-            cellGrid[checkRow][checkCol]->setGameObject('@', cellGrid[playerRow][playerCol]->getGameObject());
+            GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
+//            Treasure* t = dynamic_cast<Treasure*>(go);
+//            player->use(t);
+            actionEvent->addEvent(player->use(dynamic_cast<Treasure*>(go)));
+            cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
         } else {
-            actionEvent->setEvent("You can't move there.");
+            actionEvent->setEvent("There is something blocking your path.");
         }
     }
 }

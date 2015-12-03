@@ -12,7 +12,6 @@ class Troll : public Player {
   public:
     Troll();
     ~Troll();
-    void move(char dir);
     void use(Potion* p);
     void use(Treasure* g);
 };

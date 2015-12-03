@@ -11,18 +11,21 @@
 #define booster_hpp
 
 class Booster{
-private:
-    int attack;
-    int defence;
-public:
+  private:
+    int atk;
+    int def;
+
+  public:
     Booster();
     Booster(int atk, int def);
     ~Booster();
     void reset();
-    void setAttack(int);
-    void setDefence(int);
-    int getAttack();
-    int getDefence();
+    void addAtk(int);
+    void addDef(int);
+    void removeAtk(int);
+    void removeDef(int);
+    int getAtk();
+    int getDef();
 };
 
 #endif /* booster_hpp */

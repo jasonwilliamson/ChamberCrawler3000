@@ -16,10 +16,6 @@ Goblin::Goblin():Player(HP,ATK,DEF, "Goblin"){}
 
 Goblin::~Goblin(){}
 
-void Goblin::move(char dir){
-    
-}
-
 void Goblin::use(Potion* p){
     
 }

@@ -12,7 +12,6 @@ class Goblin : public Player {
   public:
     Goblin();
     ~Goblin();
-    void move(char dir);
     void use(Potion* p);
     void use(Treasure* g);
 };

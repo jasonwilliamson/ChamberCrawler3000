@@ -144,8 +144,8 @@ void Controller::updateDisplay() {
         display->updateCharacter(game->getPlayer()->getRace(),
                 game->getPlayer()->getGold(),
                 game->getPlayer()->getHp(),
-                game->getPlayer()->getAtk(),
-                game->getPlayer()->getDef());
+                game->getPlayer()->getBoosterAtk(),
+                game->getPlayer()->getBoosterDef());
         display->updateMap(game->getPlayerCell()->getRow(),
                 game->getPlayerCell()->getColumn(),
                 game->getPlayerCell()->getCellChar());

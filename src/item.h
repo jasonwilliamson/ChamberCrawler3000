@@ -1,20 +1,20 @@
-//
-//  item.hpp
-//  loadingFromFile
-//
-//  Created by Jason Williamson on 2015-11-29.
-//  Copyright © 2015 Jason Williamson. All rights reserved.
-//
-
-#ifndef item_hpp
-#define item_hpp
+#ifndef ITEM_H
+#define ITEM_H
 
 #include "gameobject.h"
 
-class Item: public GameObject{
-public:
-    Item(int value);
+class Item : public GameObject {
+  private:
+    int value;
+    int type;
+
+  public:
+    Item(int value, int type);
     virtual ~Item();
+    void setValue(int);
+    int getValue();
+    void setType(int);
+    int getType();
 };
 
-#endif /* item_hpp */
+#endif

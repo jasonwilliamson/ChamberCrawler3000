@@ -9,9 +9,9 @@
 
 #include "gameobject.h"
 
-GameObject::GameObject(int value):value(value), turnFlag(false){}
+GameObject::GameObject() : turnFlag(false) {}
 
-GameObject::~GameObject(){}
+GameObject::~GameObject() {}
 
 bool GameObject::getTurnFlag(){
     return this->turnFlag;
@@ -19,12 +19,4 @@ bool GameObject::getTurnFlag(){
 
 void GameObject::switchTurnFlag(){
     this->turnFlag = !this->turnFlag;
-}
-
-void GameObject::setValue(int value) {
-    this->value = value;
-}
-
-int GameObject::getValue() {
-    return value;
 }

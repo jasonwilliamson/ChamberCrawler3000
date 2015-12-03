@@ -17,4 +17,11 @@ const int VAMPIRE = 2;
 const int GOBLIN = 3;
 const int TROLL = 4;
 
+const int RH = 0;
+const int BA = 1;
+const int BD = 2;
+const int PH = 3;
+const int WA = 4;
+const int WD = 5;
+
 #endif

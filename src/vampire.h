@@ -16,7 +16,6 @@ class Vampire : public Player {
   public:
     Vampire();
     ~Vampire();
-    void move(char dir);
     void use(Potion* p);
     void use(Treasure* g);
 };

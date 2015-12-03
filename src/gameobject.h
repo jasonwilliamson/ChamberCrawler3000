@@ -12,13 +12,12 @@
 
 class GameObject{
   private:
-    int value;
 
   protected:
     bool turnFlag;
 
   public:
-    GameObject(int value = 0);
+    GameObject();
     virtual ~GameObject();
     bool getTurnFlag();
     void switchTurnFlag();

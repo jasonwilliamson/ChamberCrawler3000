@@ -12,10 +12,6 @@ Drow::Drow():Player(HP,ATK,DEF, "Drow") {}
 
 Drow::~Drow() {}
 
-void Drow::move(char dir){
-    
-}
-
 void Drow::use(Potion* p) {
 
 }

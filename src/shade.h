@@ -12,7 +12,6 @@ class Shade : public Player {
   public:
     Shade();
     ~Shade();
-    void move(char dir);
     void use(Potion* p);
     void use(Treasure* g); 
 };
