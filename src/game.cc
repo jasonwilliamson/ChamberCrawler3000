@@ -128,8 +128,8 @@ void Game::updateEnemy(){
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100/100 + playerDefense) * enemyAtk);
-                            player->setDamageHp(damage);
+                           // int damage = ceil((100/100 + playerDefense) * enemyAtk);
+                           // player->setDamageHp(damage);
                             if(player->isSlain()){
                                 cout << "player has been slain" << endl;
                             }
