@@ -114,40 +114,7 @@ iSecret = rand() % 10 + 1;
 //update cells ENEMIES TURN
 void Game::updateEnemy(){
     for (int r = 0; r < HEIGHT; r++) {
-        for (int c = 0; c < WIDTH; c++) {
-            //Cell *tmpCell = cellGrid[r][c];
-            //Just movement for now
-            /*char cellChar = cellGrid[r][c]->getCellChar();
-            GameObject* go = cellGrid[r][c]->getGameObject();
-            if (eCatalogue.isEnemy(cellChar)) {
-                if (go->getTurnFlag() == false) {
-                    int direction = rand() % 8 + 1;
-                    int checkRow = r, checkCol = c;
-                    if (direction == 1 || direction == 2 || direction == 3) {
-                        checkRow--;
-                    }
-                    if (direction == 1 || direction == 4 || direction == 6) {
-                        checkCol--;
-                    }
-                    if (direction == 6 || direction == 7 || direction == 8) {
-                        checkRow++;
-                    }
-                    if (direction == 3 || direction == 5 || direction == 8) {
-                        checkCol++;
-                    }
-
-                    if (cellGrid[checkRow][checkCol]->getCellChar() == '.') {
-                        cellGrid[checkRow][checkCol]->setGameObject(
-                                cellGrid[r][c]->getCellChar(), 
-                                cellGrid[r][c]->getGameObject());
-                        cellGrid[r][c]->removeGameObject();
-                    }
-                }
-                go->switchTurnFlag();
-            }
-            */
-            
- 
+        for (int c = 0; c < WIDTH; c++) { 
             Cell *tmpCell = cellGrid[r][c];
             GameObject *tmpGObj = tmpCell->getGameObject();
             if (tmpGObj && masterTurnFlag != tmpGObj->getTurnFlag()) {
@@ -161,11 +128,11 @@ void Game::updateEnemy(){
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            //int damage = ceil((100/100 + playerDefense) * enemyAtk);
-                            //player->setDamageHp(damage);
-                            //if(player->isSlain()){
-                            //    cout << "player has been slain" << endl;
-                            //}
+                            int damage = ceil((100/100 + playerDefense) * enemyAtk);
+                            player->setDamageHp(damage);
+                            if(player->isSlain()){
+                                cout << "player has been slain" << endl;
+                            }
                             cout << "enemy will attack" << endl;
                         }else{
                             //attack missed
