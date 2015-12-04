@@ -180,31 +180,39 @@ void Game::updateEnemy(){
                         float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
                         float playerDefence = static_cast<float>(player->getDef()); //need to setup player here
                         int damage = enemyAttack(enemyAtk, playerDefence);
-                        
+
                         // Orc attack on Goblin 50% more damage
                         if ((cellChar == 'O') && (player->getRace() == "Goblin")) {
                             damage = floor(damage * 1.5);
                         }
-                        
+
                         string race = eCatalogue.getRace(cellChar);
                         if (damage == 0) {
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
-                            actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                            stringstream ss;
+                            ss >> damage;
+                            string dmg;
+                            ss << dmg;
+                            actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                         }
-                        
+
                         player->setDamageHp(damage);
                         if(player->isSlain()){
                             actionEvent->addEvent("You have been slain.");
                         }
-                        
+
                         // Elf get two chances to attack, except on Drow
                         if ((cellChar == 'E') && (player->getRace() != "Drow")){
                             damage = enemyAttack(enemyAtk, playerDefence);
                             if (damage == 0) {
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
-                                actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                                stringstream ss;
+                                ss >> damage;
+                                string dmg;
+                                ss << dmg;
+                                actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
                             if(player->isSlain()){
@@ -232,7 +240,7 @@ void Game::notify(int mode, int direction) {
     int playerRow = playerCell->getRow();
     int playerCol = playerCell->getColumn();
     int checkRow = playerRow, checkCol = playerCol;
-    
+
     if (direction == 1 || direction == 2 || direction == 3) {
         checkRow--;
     }
@@ -245,9 +253,9 @@ void Game::notify(int mode, int direction) {
     if (direction == 3 || direction == 5 || direction == 8) {
         checkCol++;
     }
-    
+
     char check_char = cellGrid[checkRow][checkCol]->getCellChar();
-    
+
     if (mode == USE) {
         if (check_char == 'P') {
             GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
@@ -257,7 +265,7 @@ void Game::notify(int mode, int direction) {
         } else {
             actionEvent->setEvent("There is nothing here to use.");
         }
-    //To Do set merchWillAttack = true; if you attack a merchant
+        //To Do set merchWillAttack = true; if you attack a merchant
     } else if (mode == ATTACK) {
         actionEvent->setEvent("You attack.");
     } else if (mode == MOVE) {
