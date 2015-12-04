@@ -1,9 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
+#include <fstream>
 #include "game.h"
 #include "level.h"
 #include "filelevel.h"
+#include "normallevel.h"
 #include "cell.h"
 #include "player.h"
 #include "shade.h"
@@ -83,15 +85,49 @@ void Game::setupCellBlockRadii(){
  */
 void Game::load() {
     if (fromFile) {
-        FileLevel level;
+        FileLevel level = FileLevel();
         playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
         playerCell->setGameObject('@', player);
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
         setupCellBlockRadii();
     } else {
-        //levelCreator->generate(cellGrid);
+        cout << "load" << endl;
+        char blankMap[HEIGHT][WIDTH];
+        cout << "1" << endl;
+        string file = "res/map-layout-newline";
+        cout << "2" << endl;
+        ifstream fs;
+        cout << "3" << endl;
+        fs.open(file.c_str());
+        cout << "4" << endl;
+        if (fs.is_open()) {
+            cout << "file is open" << endl;
+            fs >> noskipws;
+            char cell;
+            for (int r = 0; r < HEIGHT; r++) {
+                for (int c = 0; c < WIDTH; c++) {
+                    fs >> cell;
+                    if (cell == '\n') {
+                        cout << "skipping new line" << endl;
+                        fs >> cell;
+                        cout << " cell: " << cell << endl;
+                    }
+                    if (fs.fail()) {
+                        cerr << "Error: file was not read properly" << endl;
+                    }
+                    blankMap[r][c] = cell;
+                }
+            }
+            fs.close();
+        }else{
+            cout << "File could not open" << endl;
+        }
+        NormalLevel level = NormalLevel(); //this will call init
+        playerCell = level.initLevel(cellGrid, blankMap); //init player here
+        setupCellBlockRadii();
+        playerCell->setGameObject('@', player);
+        cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
     }
-    
 }
 
 void Game::nullCells() {
@@ -101,17 +137,6 @@ void Game::nullCells() {
         }
     }
 }
-
-/*
- int iSecret, iGuess;
- 
- //initialize random seed:
-srand (time(NULL));
-
-// generate secret number between 1 and 10:
-iSecret = rand() % 10 + 1;
-
- */
 
 //update cells ENEMIES TURN
 void Game::updateEnemy(){
@@ -126,7 +151,7 @@ void Game::updateEnemy(){
                         float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
                         float playerDefense = static_cast<float>(player->getDef()); //need to setup player here
                         int fiftyFifty;
-                        srand( static_cast<unsigned int>(time(NULL)));
+                        //srand( static_cast<unsigned int>(time(NULL)));
                         fiftyFifty = rand() % 2 + 1;
                         if (1 == fiftyFifty) {
                             //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
@@ -165,7 +190,7 @@ void Game::notify(int mode, int direction) {
     int playerRow = playerCell->getRow();
     int playerCol = playerCell->getColumn();
     int checkRow = playerRow, checkCol = playerCol;
-
+    
     if (direction == 1 || direction == 2 || direction == 3) {
         checkRow--;
     }
@@ -178,7 +203,7 @@ void Game::notify(int mode, int direction) {
     if (direction == 3 || direction == 5 || direction == 8) {
         checkCol++;
     }
-
+    
     char check_char = cellGrid[checkRow][checkCol]->getCellChar();
     
     if (mode == USE) {
@@ -196,13 +221,13 @@ void Game::notify(int mode, int direction) {
         if (check_char == '.' || check_char == '#' || check_char == '+') {
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
-            playerCell->setRow(checkRow);
-            playerCell->setColumn(checkCol);
+            //playerCell->setRow(checkRow);
+            //playerCell->setColumn(checkCol);
             updateEnemy();
         } else if (check_char == 'G') {
             GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
-//            Treasure* t = dynamic_cast<Treasure*>(go);
-//            player->use(t);
+            //            Treasure* t = dynamic_cast<Treasure*>(go);
+            //            player->use(t);
             actionEvent->addEvent(player->use(dynamic_cast<Treasure*>(go)));
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
@@ -214,7 +239,6 @@ void Game::notify(int mode, int direction) {
         }
     }
 }
-
 /* Game::getState()
  * Returns the value of the private gamestate field
  * void -> int

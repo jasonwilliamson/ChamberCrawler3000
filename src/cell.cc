@@ -54,7 +54,8 @@ void Cell::setGameObject(char gameObjectChar, GameObject *gameObj){
 }
 
 void Cell::removeGameObject() {
-    gameObj = NULL;
+    this->gameObj = NULL;
+    this->gameObjectChar = ' ';
 }
 
 int Cell::getRow() {

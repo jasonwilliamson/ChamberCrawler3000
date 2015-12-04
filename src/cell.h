@@ -42,6 +42,8 @@ public:
     void setRow(int);
     int getColumn();
     void setColumn(int);
+    void setChamberNumber(int);
+    int getChamberNumber();
 
     bool isPlayerWithinBlock();
     void addNeighbourBlock(Cell *block);

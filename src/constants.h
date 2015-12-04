@@ -24,4 +24,5 @@ const int PH = 3;
 const int WA = 4;
 const int WD = 5;
 
+const int TOTAL_CHAMBERS = 5;
 #endif
