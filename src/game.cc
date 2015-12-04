@@ -13,6 +13,12 @@
 #include "vampire.h"
 #include "goblin.h"
 #include "troll.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "orc.h"
+#include "merchant.h"
+#include "halfling.h"
+#include "dragon.h"
 
 using namespace std;
 
@@ -22,6 +28,7 @@ Game::Game():gamestate(0), curFloor(1) {
     playerCell = NULL;
     masterTurnFlag = true;
     actionEvent = new ActionEvent();
+    merchWillAttack = false;
 }
 
 /* Game(filedata)
@@ -41,6 +48,7 @@ Game::Game(char data[HEIGHT * 5][WIDTH]):gamestate(0), curFloor(1) {
     playerCell = NULL;
     masterTurnFlag = true;
     actionEvent = new ActionEvent();
+    merchWillAttack = false;
 }
 
 Game::~Game() {}
@@ -130,38 +138,66 @@ void Game::nullCells() {
         }
     }
 }
+int Game::enemyAttack(float enemyAtk, float playerDefence){
+    int damage = 0;
+    int fiftyFifty;
+    fiftyFifty = rand() % 2 + 1;
+    if (1 == fiftyFifty) {
+        damage = ceil((100.00/(100.00 + playerDefence)) * enemyAtk);
+    }
+    return damage;
+}
+
+//PC deals 5 damage to H (135 HP). H deals 5 damage to PC.
+//actionEvent->setEvent("You attack.");
 
 //update cells ENEMIES TURN
 void Game::updateEnemy(){
     for (int r = 0; r < HEIGHT; r++) {
-        for (int c = 0; c < WIDTH; c++) { 
+        for (int c = 0; c < WIDTH; c++) {
             Cell *tmpCell = cellGrid[r][c];
             GameObject *tmpGObj = tmpCell->getGameObject();
             if (tmpGObj && masterTurnFlag != tmpGObj->getTurnFlag()) {
                 char cellChar = tmpCell->getCellChar();
                 if (eCatalogue.isEnemy(cellChar)) {
-                    if(tmpCell->isPlayerWithinBlock()){
-                        float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
-                        float playerDefense = static_cast<float>(player->getDef()); //need to setup player here
-                        int fiftyFifty;
-                        //srand( static_cast<unsigned int>(time(NULL)));
-                        fiftyFifty = rand() % 2 + 1;
-                        if (1 == fiftyFifty) {
-                            //Damage(Def ender) = ceiling((100/(100+Def (Def ender)))∗Atk(Attacker))
-                            int damage = ceil((100.00/(100.00 + playerDefense)) * enemyAtk);
-                            cout << "damage: " << damage << " playDefense " << playerDefense << " enemyAtk " << enemyAtk << endl;
-                            player->setDamageHp(damage);
-                            if(player->isSlain()){
-                                cout << "player has been slain" << endl;
-                            }
-                            cout << "enemy will attack" << endl;
-                        }else{
-                            //attack missed
-                            cout << "enemies attack missed" << endl;
-                        }
-                    }else{
+                    if(!tmpCell->isPlayerWithinBlock() || ((cellChar == 'M') && (!merchWillAttack))){
                         //enemy not within one block radius so it must move
                         tmpCell->randomizeEnemyMovement();
+                    }else{
+                        float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
+                        float playerDefence = static_cast<float>(player->getDef()); //need to setup player here
+                        int damage = enemyAttack(enemyAtk, playerDefence);
+                        
+                        // Orc attack on Goblin 50% more damage
+                        if ((cellChar == 'O') && (player->getRace() == "Goblin")) {
+                            damage = floor(damage * 1.5);
+                        }
+                        
+                        string race = eCatalogue.getRace(cellChar);
+                        if (damage == 0) {
+                            actionEvent->setEvent(race + " has missed an attack.");
+                        }else{
+                            actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                        }
+                        
+                        player->setDamageHp(damage);
+                        if(player->isSlain()){
+                            actionEvent->addEvent("You have been slain.");
+                        }
+                        
+                        // Elf get two chances to attack, except on Drow
+                        if ((cellChar == 'E') && (player->getRace() != "Drow")){
+                            damage = enemyAttack(enemyAtk, playerDefence);
+                            if (damage == 0) {
+                                actionEvent->setEvent(race + " has missed an attack.");
+                            }else{
+                                actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                            }
+                            player->setDamageHp(damage);
+                            if(player->isSlain()){
+                                actionEvent->addEvent("You have been slain.");
+                            }
+                        }
                     }
                 }
                 //show GameObject has had turn
@@ -208,6 +244,7 @@ void Game::notify(int mode, int direction) {
         } else {
             actionEvent->setEvent("There is nothing here to use.");
         }
+    //To Do set merchWillAttack = true; if you attack a merchant
     } else if (mode == ATTACK) {
         actionEvent->setEvent("You attack.");
     } else if (mode == MOVE) {
