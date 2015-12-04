@@ -9,6 +9,7 @@
 #include "player.h"
 
 class Game {
+  private:
     ActionEvent* actionEvent;
     Player* player;   
     Display* display;
@@ -29,6 +30,7 @@ class Game {
     Game(char data[HEIGHT * 5][WIDTH]);
     ~Game();
     
+    void clearMap();
     void load();
     void nullCells();
     void notify(int mode, int direction);

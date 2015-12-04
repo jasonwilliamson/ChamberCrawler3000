@@ -79,6 +79,16 @@ void Game::setupCellBlockRadii(){
     }
 }
 
+void Game::clearMap() {
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            cellGrid[i][j]->removeGameObject();
+//            delete cellGrid[i][j];
+        }
+    }
+    cout << "Map cleared" << endl;
+}
+
 /* load()
  * If !fromFile: randomly generates player position, enemies, gold, potions on the floor
  * If fromFile: generates floor layout specified in file
@@ -89,7 +99,9 @@ void Game::load() {
         playerCell = level.initLevel(cellGrid, fileMaps[curFloor - 1]);
         playerCell->setGameObject('@', player);
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
-        setupCellBlockRadii();
+        if (curFloor == 1) {
+            setupCellBlockRadii();
+        }
     } else {
         char blankMap[HEIGHT][WIDTH];
         string file = "res/map-layout-newline";
@@ -225,6 +237,16 @@ void Game::notify(int mode, int direction) {
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
+        } else if (check_char == '\\') {
+            if (curFloor == 5) {
+                actionEvent->setEvent("You are freed from the dungeon!");
+                gamestate = MENU;
+            } else {
+                curFloor++;
+                clearMap();
+                load();
+                actionEvent->setEvent("Stepping down the staircase, you move deeper into the dungeon.");
+            }
         } else {
             actionEvent->setEvent("There is something blocking your path.");
         }
