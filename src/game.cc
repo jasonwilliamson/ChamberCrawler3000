@@ -97,6 +97,11 @@ void Game::clearMap() {
     }
 }
 
+void Game::newGame() {
+    delete player;
+    clearMap();
+}
+
 /* load()
  * If !fromFile: randomly generates player position, enemies, gold, potions on the floor
  * If fromFile: generates floor layout specified in file
@@ -108,11 +113,13 @@ void Game::load() {
         playerCell->setGameObject('@', player);
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
         if (curFloor == 1) {
+            cout << "is this our problem" << endl;
             setupCellBlockRadii();
+            cout << "this is not our problem" << endl;
         }
     } else {
         char blankMap[HEIGHT][WIDTH];
-        string file = "res/map-layout-newline";
+        string file = "../res/map-layout-newline";
         ifstream fs;
         fs.open(file.c_str());
         if (fs.is_open()) {
@@ -191,9 +198,9 @@ void Game::updateEnemy(){
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
                             stringstream ss;
-                            ss << damage;
+                            ss >> damage;
                             string dmg;
-                            ss >> dmg;
+                            ss << dmg;
                             actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                         }
 
@@ -209,9 +216,9 @@ void Game::updateEnemy(){
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
                                 stringstream ss;
-                                ss << damage;
+                                ss >> damage;
                                 string dmg;
-                                ss >> dmg;
+                                ss << dmg;
                                 actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
@@ -288,6 +295,16 @@ void Game::notify(int mode, int direction) {
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
+        } else if (check_char == '\\') {
+            if (curFloor == 5) {
+                actionEvent->setEvent("You are freed from the dungeon.");
+                gamestate = MENU;
+            } else {
+                curFloor++;
+                clearMap();
+                load();
+                actionEvent->setEvent("Stepping down the staircase, you move deeper into the dungeon.");
+            }
         } else {
             actionEvent->setEvent("There is something blocking your path.");
         }

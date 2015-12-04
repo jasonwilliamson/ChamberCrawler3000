@@ -83,6 +83,8 @@ void Controller::play() {
         } else if (game->getState() == PLAY) {
             if (cmd == "r") {
                 // Restart Game
+                game->clearMap();
+                game->newGame();
                 game->setState(MENU);
             } else if (cmd == "u") {
                 string input;

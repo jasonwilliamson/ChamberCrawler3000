@@ -32,6 +32,7 @@ class Game {
     ~Game();
     
     void clearMap();
+    void newGame();
     void load();
     void nullCells();
     void notify(int mode, int direction);
