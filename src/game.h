@@ -24,13 +24,14 @@ class Game {
     void updateEnemy();
     bool masterTurnFlag;
     int enemyAttack(float enemyAtk, float playerDefence);
+    int playerAttack(float playerAtk, float enemyDefence);
     bool merchWillAttack;
 
   public:
     Game();
     Game(char data[HEIGHT * 5][WIDTH]);
     ~Game();
-    
+    void newGame();
     void clearMap();
     void load();
     void nullCells();

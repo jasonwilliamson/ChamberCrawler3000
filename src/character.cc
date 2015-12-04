@@ -8,6 +8,8 @@
 //
 
 #include "character.h"
+#include <iostream>
+using namespace std;
 
 Character::Character(int hp, int atk, int def):hp(hp), atk(atk), def(def), gold(0){}
 
@@ -63,5 +65,6 @@ void Character::setGold(int gold) {
 }
 
 void Character::addGold(int gold) {
+    cout << "$ " << gold << endl;
     this->gold += gold;
 }

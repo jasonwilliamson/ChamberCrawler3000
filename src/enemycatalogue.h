@@ -21,6 +21,7 @@ public:
     EnemyCatalogue();
     ~EnemyCatalogue();
     int getAtk(char);
+    int getDef(char value);
     bool isEnemy(char);
     int getGoldDropped(char value);
     std::string getRace(char value);

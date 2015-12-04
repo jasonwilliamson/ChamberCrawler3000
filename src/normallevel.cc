@@ -166,7 +166,7 @@ GameObject* NormalLevel::initEnemy(char race){
     }else if (race == 'O'){
         obj = new Orc();
     }else if (race == 'M'){
-        obj = new Orc();
+        obj = new Merchant();
     }else if (race == 'L'){
         obj = new Halfling();
     }else{

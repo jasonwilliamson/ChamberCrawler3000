@@ -81,6 +81,54 @@ string EnemyCatalogue::getRace(char value){
     return race;
 }
 
+int EnemyCatalogue::getDef(char value){
+    switch (value) {
+        case 'H':
+        {
+            Human enemy = Human();
+            return enemy.getDef();
+            break;
+        }
+        case 'W':
+        {
+            Dwarf enemy = Dwarf();
+            return enemy.getDef();
+        }
+        case 'E':
+        {
+            Elf enemy = Elf();
+            return enemy.getDef();
+        }
+        case 'O':
+        {
+            Orc enemy = Orc();
+            return enemy.getDef();
+        }
+        case 'M':
+        {
+            Merchant enemy = Merchant();
+            return enemy.getDef();
+        }
+        case 'L':
+        {
+            Halfling enemy = Halfling();
+            return enemy.getDef();
+        }
+        case 'D':
+        {
+            Dragon enemy = Dragon();
+            return enemy.getDef();
+        }
+        default:
+        {
+            cout << "Error EnemyCatalogue:@getDef " << value << " not recognized" << endl;
+            break;
+        }
+    }
+    return 0;
+}
+
+
 
 int EnemyCatalogue::getAtk(char value){
     switch (value) {

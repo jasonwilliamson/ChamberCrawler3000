@@ -117,7 +117,7 @@ void Game::load() {
         }
     } else {
         char blankMap[HEIGHT][WIDTH];
-        string file = "../res/map-layout-newline";
+        string file = "res/map-layout-newline";
         ifstream fs;
         fs.open(file.c_str());
         if (fs.is_open()) {
@@ -166,6 +166,12 @@ int Game::enemyAttack(float enemyAtk, float playerDefence){
     return damage;
 }
 
+int Game::playerAttack(float playerAtk, float enemyDefence){
+    int damage = 0;
+    damage = ceil((100.00/(100.00 + enemyDefence)) * playerAtk);
+    return damage;
+}
+
 //PC deals 5 damage to H (135 HP). H deals 5 damage to PC.
 //actionEvent->setEvent("You attack.");
 
@@ -193,13 +199,13 @@ void Game::updateEnemy(){
 
                         string race = eCatalogue.getRace(cellChar);
                         if (damage == 0) {
-                            actionEvent->setEvent(race + " has missed an attack.");
+                            actionEvent->addEvent(race + " has missed an attack.");
                         }else{
                             stringstream ss;
-                            ss >> damage;
+                            ss << damage;
                             string dmg;
-                            ss << dmg;
-                            actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
+                            ss >> dmg;
+                            actionEvent->addEvent(race + " deals " + dmg + " damage against you!");
                         }
 
                         player->setDamageHp(damage);
@@ -211,13 +217,13 @@ void Game::updateEnemy(){
                         if ((cellChar == 'E') && (player->getRace() != "Drow")){
                             damage = enemyAttack(enemyAtk, playerDefence);
                             if (damage == 0) {
-                                actionEvent->setEvent(race + " has missed an attack.");
+                                actionEvent->addEvent(race + " has missed an attack.");
                             }else{
                                 stringstream ss;
-                                ss >> damage;
+                                ss << damage;
                                 string dmg;
-                                ss << dmg;
-                                actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
+                                ss >> dmg;
+                                actionEvent->addEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
                             if(player->isSlain()){
@@ -272,7 +278,107 @@ void Game::notify(int mode, int direction) {
         }
         //To Do set merchWillAttack = true; if you attack a merchant
     } else if (mode == ATTACK) {
-        actionEvent->setEvent("You attack.");
+        //actionEvent->setEvent("You attack.");
+        //2 //4// //6 //8
+        Cell *checkCell;
+        if (direction == 2) {
+            checkCell = cellGrid[checkRow][playerCol];
+        }else if (direction == 4){
+            checkCell = cellGrid[playerRow][checkCol];
+        }else if (direction == 5){
+            checkCell = cellGrid[playerRow][checkCol];
+        }else if (direction == 7){
+            checkCell = cellGrid[checkRow][playerCol];
+        }
+        char cellChar = checkCell->getCellChar();
+        if (eCatalogue.isEnemy(cellChar)){
+            bool slain = false;
+            int enemyDef = eCatalogue.getDef(cellChar);
+            int damage = playerAttack(player->getBoosterAtk(),enemyDef);
+            string race = eCatalogue.getRace(cellChar);
+            GameObject *go = checkCell->getGameObject();
+            if (race == "Human") {
+                Human *e = dynamic_cast<Human*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    GameObject * treasure = new Treasure('G', goldValue);
+                    checkCell->setGameObject('G', treasure);
+                }
+            }else if (race == "Elf"){
+                Elf *e = dynamic_cast<Elf*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    player->addGold(goldValue);
+                    slain = true;
+                }
+            }else if (race == "Dwarf"){
+                Dwarf *e = dynamic_cast<Dwarf*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    player->addGold(goldValue);
+                    slain = true;
+                }
+            }else if (race == "Dragon"){
+                Dragon *e = dynamic_cast<Dragon*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    delete go;
+                    checkCell->removeGameObject();
+                    slain = true;
+                }
+            }else if (race == "Halfling"){
+                Halfling *e = dynamic_cast<Halfling*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    player->addGold(goldValue);
+                    slain = true;
+                }
+            }else if (race == "Merchant"){
+                Merchant *e = dynamic_cast<Merchant*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    GameObject * treasure = new Treasure('G', goldValue);
+                    checkCell->setGameObject('G', treasure);
+                    slain = true;
+                }
+                
+            }else if (race == "Orc"){
+                Orc *e = dynamic_cast<Orc*>(go);
+                e->setDamageHp(damage);
+                if(e->isSlain()){
+                    int goldValue = e->goldDropped();
+                    delete go;
+                    checkCell->removeGameObject();
+                    player->addGold(goldValue);
+                    slain = true;
+                }
+            }
+            stringstream ss;
+            ss << damage;
+            string dmg;
+            ss >> dmg;
+            actionEvent->setEvent("You deal " + dmg + " against " + race + ".");
+            updateEnemy();
+            
+            if(slain){
+                actionEvent->addEvent(race + " has been slain.");
+            }
+        }
     } else if (mode == MOVE) {
         if (check_char == '.' || check_char == '#' || check_char == '+') {
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
@@ -298,6 +404,7 @@ void Game::notify(int mode, int direction) {
                 actionEvent->setEvent("You are freed from the dungeon.");
                 gamestate = MENU;
             } else {
+                player->resetBooster();
                 curFloor++;
                 clearMap();
                 load();

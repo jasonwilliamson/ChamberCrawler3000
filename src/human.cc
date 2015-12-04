@@ -27,5 +27,5 @@ void Human::update(){}
 void Human::attack(){}
 
 int Human::goldDropped(){
-    return GOLD_DROPPED;
+    return 4;
 }
