@@ -191,9 +191,9 @@ void Game::updateEnemy(){
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
                             stringstream ss;
-                            ss >> damage;
+                            ss << damage;
                             string dmg;
-                            ss << dmg;
+                            ss >> dmg;
                             actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                         }
 
@@ -209,9 +209,9 @@ void Game::updateEnemy(){
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
                                 stringstream ss;
-                                ss >> damage;
+                                ss << damage;
                                 string dmg;
-                                ss << dmg;
+                                ss >> dmg;
                                 actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
