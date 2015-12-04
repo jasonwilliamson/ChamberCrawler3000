@@ -58,6 +58,7 @@ Game::~Game() {}
 void Game::setupCellBlockRadii(){
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
+            cellGrid[i][j]->resetBlockRadii();
             int row = i;
             int col = j;
             if (((row - 1) >= 0) && ((col - 1) >= 0)) {
@@ -115,7 +116,7 @@ void Game::load() {
         ifstream fs;
         fs.open(file.c_str());
         if (fs.is_open()) {
-            cout << "file is open" << endl;
+            //cout << "file is open" << endl;
             fs >> noskipws;
             char cell;
             for (int r = 0; r < HEIGHT; r++) {
@@ -134,6 +135,7 @@ void Game::load() {
         }else{
             cout << "File could not open" << endl;
         }
+        setupCellBlockRadii();
         NormalLevel level = NormalLevel(); //this will call init
         playerCell = level.initLevel(cellGrid, blankMap); //init player here
         playerCell->setGameObject('@', player);
@@ -188,11 +190,7 @@ void Game::updateEnemy(){
                         if (damage == 0) {
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
-                            stringstream ss;
-                            ss << damage;
-                            string dmg;
-                            ss >> dmg;
-                            actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
+                            actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
                         }
                         
                         player->setDamageHp(damage);
@@ -206,11 +204,7 @@ void Game::updateEnemy(){
                             if (damage == 0) {
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
-                                stringstream ss;
-                                ss << damage;
-                                string dmg;
-                                ss >> dmg;
-                                actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
+                                actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
                             }
                             player->setDamageHp(damage);
                             if(player->isSlain()){
@@ -275,22 +269,17 @@ void Game::notify(int mode, int direction) {
             updateEnemy();
         } else if (check_char == 'G') {
             GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
+            Item *t = dynamic_cast<Item*>(go);
+            //  cout << t->getType() << endl;
+            if (t->getType() == 6) {
+                //cout << "do something" << endl;
+            }
             actionEvent->addEvent(player->use(dynamic_cast<Treasure*>(go)));
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
-        } else if (check_char == '\\') {
-            if (curFloor == 5) {
-                actionEvent->setEvent("You are freed from the dungeon!");
-                gamestate = MENU;
-            } else {
-                curFloor++;
-                clearMap();
-                load();
-                actionEvent->setEvent("Stepping down the staircase, you move deeper into the dungeon.");
-            }
         } else {
             actionEvent->setEvent("There is something blocking your path.");
         }

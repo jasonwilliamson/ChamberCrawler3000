@@ -56,17 +56,10 @@ Cell* NormalLevel::initLevelPlayer(){
     int gridSize = (static_cast<int> (selChmbr.size()));
     int randCell = rand() % gridSize;
     Cell *playerCell = selChmbr[randCell];
-    cout << "1 " << randCell << endl;
     Cell * cell = getRandonChamberCell();
     cell->setGameObject('@', NULL);
-    cout << cell->getRow() << " " << cell->getColumn() << endl;
     //delete place in chamber so not to duplicate
-    selChmbr.erase(remove(selChmbr.begin(), selChmbr.end(), cell), selChmbr.end());
-    
-    /*for(vector<Cell *>::iterator it = selChmbr.begin(); it != selChmbr.end(); ++it) {
-        if (cell == *it ) {
-        }
-    }*/
+    selChmbr.erase (selChmbr.begin() + randCell);
     
     //initstairs
     int randStairChamber;
@@ -81,7 +74,7 @@ Cell* NormalLevel::initLevelPlayer(){
     stairs->setDefaultChar('\\');
     
     //delete place in chamber so not to duplicate
-    stairChmbr.erase(remove(stairChmbr.begin(), stairChmbr.end(), cell), stairChmbr.end());
+    stairChmbr.erase (stairChmbr.begin() + randCell);
     return playerCell;
 }
 
@@ -122,10 +115,40 @@ void NormalLevel::initLevelTreasure(){
         }
         
         //chamber spawn
-        Cell *cell = getRandonChamberCell();
-        GameObject * treasure = new Treasure('G', treasureTyp);
-        cell->setGameObject('G', treasure);
-        //will need to get dragons here too!
+        if (treasureTyp != 6) {
+            Cell *cell = getRandonChamberCell();
+            GameObject * treasure = new Treasure('G', treasureTyp);
+            cell->setGameObject('G', treasure);
+        }else{
+            // must do this the long way
+            int randChamber;
+            randChamber = rand() % TOTAL_CHAMBERS;
+            vector<Cell *> selChmbr = getChamber(randChamber);
+            int gridSize = (static_cast<int> (selChmbr.size()));
+            int randCell;
+            randCell = rand() % gridSize;
+            Cell *cell = selChmbr[randCell];
+        
+            //delete place in chamber so not to duplicate
+            selChmbr.erase (selChmbr.begin() + randCell);
+        
+            Cell *dragonCell = cell->getEmptyCellForDragon();
+            int count = 0;
+            for (vector<Cell *>::iterator i = selChmbr.begin(); i != selChmbr.end(); i++) {
+                Cell* dp = dynamic_cast<Cell*>(*i);
+                if(dp == 0) cout << "dynamic_cast to pointer failed" << endl;
+                if (dp == dragonCell) {
+                    break;
+                }
+                ++count;
+            }
+            if (dragonCell) {
+                GameObject * enemy = initEnemy('D');
+                dragonCell->setGameObject('D', enemy);
+            }
+            //erase dragon spot
+            selChmbr.erase (selChmbr.begin() + count);
+        }
     }
 }
 
@@ -149,7 +172,7 @@ GameObject* NormalLevel::initEnemy(char race){
     }else{
         obj = new Dragon();
     }
-    return obj;    return obj;
+    return obj;
 }
 
 void NormalLevel::initLevelEnemy(){
@@ -178,7 +201,7 @@ Cell* NormalLevel::getRandonChamberCell(){
     Cell *cell = selChmbr[randCell];
     
     //delete place in chamber so not to duplicate
-    selChmbr.erase(remove(selChmbr.begin(), selChmbr.end(), cell), selChmbr.end());
+    selChmbr.erase (selChmbr.begin() + randCell);
     return cell;
 }
 
@@ -192,10 +215,8 @@ Cell * NormalLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char blankMap[HEIGH
             cell->setDefaultChar(value);
             if (value == '.') {
                 if ((r >= 3) && (r <= 6) && (c >= 3) && (c <= 28)) {
-                    
                     chmbr1.push_back(cell);
                 }else if ((r >= 3) && (r <= 4) && (c >= 39) && (c <= 61)){
-                    
                     chmbr2.push_back(cell);
                 }else if ((r == 5) && (c >= 39) && (c >= 69)){
                     chmbr2.push_back(cell);
@@ -217,6 +238,8 @@ Cell * NormalLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char blankMap[HEIGH
         }
     
     }
+    
+    
     Cell* playerCell;
     Cell *pcell = initLevelPlayer();
     playerCell = new Cell(pcell->getRow(), pcell->getColumn());

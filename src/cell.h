@@ -22,9 +22,11 @@ private:
     char gameObjectChar;
     Cell *enemyBlockRadius[MAX_NEIGHBOURS];
     Cell *playerBlockRadius[MAX_NEIGHBOURS];
+    Cell *fullBlockRadius[MAX_NEIGHBOURS];
     GameObject *gameObj;
     int enemyBlockCount;
     int playerBlockCount;
+    int fullBlockCount;
     
 public:
     Cell(int row, int column);
@@ -44,10 +46,13 @@ public:
     void setColumn(int);
     void setChamberNumber(int);
     int getChamberNumber();
+    void resetBlockRadii();
 
     bool isPlayerWithinBlock();
     void addNeighbourBlock(Cell *block);
     void randomizeEnemyMovement();
+    bool isDragonWithinBlock();
+    Cell *getEmptyCellForDragon();
     
     
     //void determineNeighbours()

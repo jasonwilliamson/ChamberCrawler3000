@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Cell::Cell(int row, int column):row(row), column(column), gameObj(NULL),enemyBlockCount(0),playerBlockCount(0) {}
+Cell::Cell(int row, int column):row(row), column(column), gameObj(NULL),enemyBlockCount(0),playerBlockCount(0),fullBlockCount(0) {}
 
 Cell::~Cell(){
     delete gameObj;
@@ -76,24 +76,26 @@ void Cell::setColumn(int c) {
 
 //will move enemy randomly within the one block radius of current cell
 void Cell::randomizeEnemyMovement(){
-    int possible = 0;
-    Cell *tmpArr[enemyBlockCount];
-    for (int i = 0; i < enemyBlockCount; i++) {
-        if (!enemyBlockRadius[i]->gameObj) {
-            tmpArr[possible] = enemyBlockRadius[i];
-            ++possible;
+    if (this->gameObjectChar != 'D') {
+        int possible = 0;
+        Cell *tmpArr[enemyBlockCount];
+        for (int i = 0; i < enemyBlockCount; i++) {
+            if (!enemyBlockRadius[i]->gameObj) {
+                tmpArr[possible] = enemyBlockRadius[i];
+                ++possible;
+            }
         }
-    }
-    int index = 0;
-    if (possible != 0) {
-        srand( static_cast<unsigned int>(time(NULL)));
-        index = rand() % possible;
-    }
+        int index = 0;
+        if (possible != 0) {
+            srand( static_cast<unsigned int>(time(NULL)));
+            index = rand() % possible;
+        }
 
-    Cell *target = tmpArr[index];
-    target->setGameObject(this->gameObjectChar, this->gameObj);
-    this->gameObj = NULL;
-    this->gameObjectChar = ' ';
+        Cell *target = tmpArr[index];
+        target->setGameObject(this->gameObjectChar, this->gameObj);
+        this->gameObj = NULL;
+        this->gameObjectChar = ' ';
+    }
 }
 
 
@@ -107,8 +109,35 @@ bool Cell::isPlayerWithinBlock(){
     return false;
 }
 
+bool Cell::isDragonWithinBlock(){
+    for (int i = 0; i < enemyBlockCount; i++) {
+        if (enemyBlockRadius[i]->getCellChar() == 'D') {
+            return true;
+        }
+    }
+    return false;
+}
+
+Cell* Cell::getEmptyCellForDragon(){
+    for (int i = 0; i <fullBlockCount; i++) {
+        if (fullBlockRadius[i]) {
+            return fullBlockRadius[i];
+        }
+    }
+    cout << "error" << endl;
+    return NULL;
+}
+
+void Cell::resetBlockRadii(){
+    fullBlockCount = 0;
+    playerBlockCount = 0;
+    enemyBlockCount = 0;
+}
+
 //only adds blocks where valid moves can be made
 void Cell::addNeighbourBlock(Cell *block){
+    fullBlockRadius[fullBlockCount] = block;
+    ++fullBlockCount;
     char value = block->getDefaultChar();
     if (value == '.') {
         enemyBlockRadius[enemyBlockCount] = block;

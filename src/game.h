@@ -9,7 +9,6 @@
 #include "player.h"
 
 class Game {
-  private:
     ActionEvent* actionEvent;
     Player* player;   
     Display* display;
