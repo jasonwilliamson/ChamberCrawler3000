@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <math.h>
+#include <sstream>
 #include <fstream>
 #include "game.h"
 #include "level.h"
@@ -91,10 +92,8 @@ void Game::clearMap() {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             cellGrid[i][j]->removeGameObject();
-//            delete cellGrid[i][j];
         }
     }
-    cout << "Map cleared" << endl;
 }
 
 /* load()
@@ -189,7 +188,11 @@ void Game::updateEnemy(){
                         if (damage == 0) {
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
-                            actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                            stringstream ss;
+                            ss << damage;
+                            string dmg;
+                            ss >> dmg;
+                            actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                         }
                         
                         player->setDamageHp(damage);
@@ -203,7 +206,11 @@ void Game::updateEnemy(){
                             if (damage == 0) {
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
-                                actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                                stringstream ss;
+                                ss << damage;
+                                string dmg;
+                                ss >> dmg;
+                                actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
                             if(player->isSlain()){
