@@ -11,6 +11,12 @@
 #include "normallevel.h"
 #include "constants.h"
 #include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "orc.h"
+#include "merchant.h"
+#include "halfling.h"
+#include "dragon.h"
 
 using namespace std;
 
@@ -126,19 +132,30 @@ void NormalLevel::initLevelTreasure(){
 //add new enemies here...
 //(value == 'H' || value == 'W' || value =='E' || value == 'O'||
 //value == 'M' || value == 'D' || value == 'L')
-GameObject* NormalLevel::initEnemy(char val){
-    GameObject *obj = new Human();
-    //switch case probably
-    //if (val == 'H') {
-    //    obj = new Human()
-    //}
-    return obj;
+GameObject* NormalLevel::initEnemy(char race){
+    GameObject *obj;
+    if (race == 'H') {
+        obj = new Human();
+    }else if (race == 'W'){
+        obj = new Dwarf();
+    }else if (race == 'E'){
+        obj = new Elf();
+    }else if (race == 'O'){
+        obj = new Orc();
+    }else if (race == 'M'){
+        obj = new Orc();
+    }else if (race == 'L'){
+        obj = new Halfling();
+    }else{
+        obj = new Dragon();
+    }
+    return obj;    return obj;
 }
 
 void NormalLevel::initLevelEnemy(){
     int const TOTAL_ENEMIES = 20;
     int const ENEMY_TYPE_COUNT = 6;
-    char enemyTypes[] = {'H', 'W', 'E', 'O', 'M', 'C'};
+    char enemyTypes[] = {'H', 'W', 'E', 'O', 'M', 'L'};
 
     for (int i = 0; i < TOTAL_ENEMIES; i++) {
         int index;

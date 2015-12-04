@@ -11,6 +11,12 @@
 #include "enemy.h"
 #include "human.h"
 #include "character.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "orc.h"
+#include "merchant.h"
+#include "halfling.h"
+#include "dragon.h"
 
 using namespace std;
 
@@ -35,11 +41,39 @@ int EnemyCatalogue::getAtk(char value){
             return enemy.getAtk();
             break;
         }
+        case 'W':
+        {
+            Dwarf enemy = Dwarf();
+            return enemy.getAtk();
+        }
+        case 'E':
+        {
+            Elf enemy = Elf();
+            return enemy.getAtk();
+        }
+        case 'O':
+        {
+            Orc enemy = Orc();
+            return enemy.getAtk();
+        }
+        case 'M':
+        {
+            Merchant enemy = Merchant();
+            return enemy.getAtk();
+        }
+        case 'L':
+        {
+            Halfling enemy = Halfling();
+            return enemy.getAtk();
+        }
+        case 'D':
+        {
+            Dragon enemy = Dragon();
+            return enemy.getAtk();
+        }
         default:
         {
             cout << "Error EnemyCatalogue:@getAtk " << value << " not recognized" << endl;
-            Human enemy = Human();
-            return enemy.getAtk(); // for now
             break;
         }
     }
@@ -54,11 +88,39 @@ int EnemyCatalogue::getGoldDropped(char value){
             return enemy.goldDropped();
             break;
         }
+        case 'W':
+        {
+            Dwarf enemy = Dwarf();
+            return enemy.goldDropped();
+        }
+        case 'E':
+        {
+            Elf enemy = Elf();
+            return enemy.goldDropped();
+        }
+        case 'O':
+        {
+            Orc enemy = Orc();
+            return enemy.goldDropped();
+        }
+        case 'M':
+        {
+            Merchant enemy = Merchant();
+            return enemy.goldDropped();
+        }
+        case 'L':
+        {
+            Halfling enemy = Halfling();
+            return enemy.goldDropped();
+        }
+        case 'D':
+        {
+            Dragon enemy = Dragon();
+            return enemy.goldDropped();
+        }
         default:
         {
             cout << "Error EnemyCatalogue:@getGoldDropped " << value << " not recognized" << endl;
-            Human enemy = Human();
-            return enemy.goldDropped(); //for now
             break;
         }
     }
@@ -66,6 +128,3 @@ int EnemyCatalogue::getGoldDropped(char value){
 }
 
 
-//void EnemyCatalogue::lookup(Human &h){
-//    cout << "Human found: EnemyCatalogue" << endl;
-//}

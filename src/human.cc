@@ -9,10 +9,12 @@
 #include "human.h"
 #include "character.h"
 
+//drops 2 normal piles of gold
+
 #define HP 140
 #define ATK 20
 #define DEF 20
-#define GOLD_DROPPED 2
+#define GOLD_DROPPED 4
 
 //140 HP, 20 Atk, 20 Def, drops 2 normal piles of gold
 

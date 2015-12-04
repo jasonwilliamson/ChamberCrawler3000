@@ -12,6 +12,12 @@
 #include "potion.h"
 #include "treasure.h"
 #include "human.h"
+#include "dwarf.h"
+#include "elf.h"
+#include "orc.h"
+#include "merchant.h"
+#include "halfling.h"
+#include "dragon.h"
 
 using namespace std;
 
@@ -33,9 +39,18 @@ GameObject* FileLevel::initEnemy(char race){
     GameObject *obj;
     if (race == 'H') {
         obj = new Human();
-    } else {
-        // add else-ifs for other races when implemented
-        obj = new Human();
+    }else if (race == 'W'){
+        obj = new Dwarf();
+    }else if (race == 'E'){
+        obj = new Elf();
+    }else if (race == 'O'){
+        obj = new Orc();
+    }else if (race == 'M'){
+        obj = new Orc();
+    }else if (race == 'L'){
+        obj = new Halfling();
+    }else{
+        obj = new Dragon();
     }
     return obj;
 }

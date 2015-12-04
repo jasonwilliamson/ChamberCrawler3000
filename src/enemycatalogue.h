@@ -22,8 +22,6 @@ class EnemyCatalogue {
 public:
     EnemyCatalogue();
     ~EnemyCatalogue();
-    //void lookup(Human &h);
-    //void lookup(Orc &o);
     int getAtk(char);
     bool isEnemy(char);
     int getGoldDropped(char value);
