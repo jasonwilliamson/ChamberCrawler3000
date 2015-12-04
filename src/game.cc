@@ -91,15 +91,10 @@ void Game::load() {
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
         setupCellBlockRadii();
     } else {
-        cout << "load" << endl;
         char blankMap[HEIGHT][WIDTH];
-        cout << "1" << endl;
         string file = "res/map-layout-newline";
-        cout << "2" << endl;
         ifstream fs;
-        cout << "3" << endl;
         fs.open(file.c_str());
-        cout << "4" << endl;
         if (fs.is_open()) {
             cout << "file is open" << endl;
             fs >> noskipws;
@@ -108,9 +103,7 @@ void Game::load() {
                 for (int c = 0; c < WIDTH; c++) {
                     fs >> cell;
                     if (cell == '\n') {
-                        cout << "skipping new line" << endl;
                         fs >> cell;
-                        cout << " cell: " << cell << endl;
                     }
                     if (fs.fail()) {
                         cerr << "Error: file was not read properly" << endl;
@@ -124,9 +117,9 @@ void Game::load() {
         }
         NormalLevel level = NormalLevel(); //this will call init
         playerCell = level.initLevel(cellGrid, blankMap); //init player here
-        setupCellBlockRadii();
         playerCell->setGameObject('@', player);
         cellGrid[playerCell->getRow()][playerCell->getColumn()]->setGameObject('@', player);
+        setupCellBlockRadii();
     }
 }
 

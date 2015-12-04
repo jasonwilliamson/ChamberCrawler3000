@@ -57,6 +57,11 @@ Cell* NormalLevel::initLevelPlayer(){
     //delete place in chamber so not to duplicate
     selChmbr.erase(remove(selChmbr.begin(), selChmbr.end(), cell), selChmbr.end());
     
+    /*for(vector<Cell *>::iterator it = selChmbr.begin(); it != selChmbr.end(); ++it) {
+        if (cell == *it ) {
+        }
+    }*/
+    
     //initstairs
     int randStairChamber;
     do{
@@ -195,9 +200,13 @@ Cell * NormalLevel::initLevel(Cell *cellGrid[HEIGHT][WIDTH], char blankMap[HEIGH
         }
     
     }
-    Cell* player = initLevelPlayer();
+    Cell* playerCell;
+    Cell *pcell = initLevelPlayer();
+    playerCell = new Cell(pcell->getRow(), pcell->getColumn());
+    playerCell->setGameObject('@', NULL);
+    
     initLevelPotions();
     initLevelTreasure();
     initLevelEnemy();
-    return player;
+    return playerCell;
 }
