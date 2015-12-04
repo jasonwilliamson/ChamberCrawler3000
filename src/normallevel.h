@@ -10,6 +10,7 @@
 #define normallevel_hpp
 
 #include <vector>
+#include <algorithm>
 #include "level.h"
 
 class NormalLevel: public Level{

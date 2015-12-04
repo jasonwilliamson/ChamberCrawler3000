@@ -221,13 +221,11 @@ void Game::notify(int mode, int direction) {
         if (check_char == '.' || check_char == '#' || check_char == '+') {
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
-            //playerCell->setRow(checkRow);
-            //playerCell->setColumn(checkCol);
+            playerCell->setRow(checkRow);
+            playerCell->setColumn(checkCol);
             updateEnemy();
         } else if (check_char == 'G') {
             GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
-            //            Treasure* t = dynamic_cast<Treasure*>(go);
-            //            player->use(t);
             actionEvent->addEvent(player->use(dynamic_cast<Treasure*>(go)));
             cellGrid[checkRow][checkCol]->setGameObject('@', player);
             cellGrid[playerRow][playerCol]->removeGameObject();
