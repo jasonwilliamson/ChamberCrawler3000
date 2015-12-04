@@ -21,8 +21,5 @@ class GameObject{
     virtual ~GameObject();
     bool getTurnFlag();
     void switchTurnFlag();
-    int getValue();
-    void setValue(int value);
-//    virtual char getDisplayChar() = 0;
 };
 #endif

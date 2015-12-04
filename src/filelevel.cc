@@ -21,6 +21,10 @@
 
 using namespace std;
 
+FileLevel::FileLevel(){}
+
+FileLevel::~FileLevel(){}
+
 GameObject* FileLevel::initPlayer(){
     return NULL;
 }

@@ -12,6 +12,8 @@ class FileLevel : public Level {
     GameObject* initEnemy(char race);
 
   public:
+    FileLevel();
+    ~FileLevel();
     Cell* initLevel(Cell *cellGrid[HEIGHT][WIDTH], char fileMap[HEIGHT][WIDTH]);
 };
 
