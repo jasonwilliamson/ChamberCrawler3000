@@ -97,6 +97,11 @@ void Game::clearMap() {
     }
 }
 
+void Game::newGame() {
+    delete player;
+    clearMap();
+}
+
 /* load()
  * If !fromFile: randomly generates player position, enemies, gold, potions on the floor
  * If fromFile: generates floor layout specified in file
@@ -112,7 +117,7 @@ void Game::load() {
         }
     } else {
         char blankMap[HEIGHT][WIDTH];
-        string file = "res/map-layout-newline";
+        string file = "../res/map-layout-newline";
         ifstream fs;
         fs.open(file.c_str());
         if (fs.is_open()) {
@@ -180,28 +185,28 @@ void Game::updateEnemy(){
                         float enemyAtk = static_cast<float>(eCatalogue.getAtk(cellChar));
                         float playerDefence = static_cast<float>(player->getDef()); //need to setup player here
                         int damage = enemyAttack(enemyAtk, playerDefence);
-                        
+
                         // Orc attack on Goblin 50% more damage
                         if ((cellChar == 'O') && (player->getRace() == "Goblin")) {
                             damage = floor(damage * 1.5);
                         }
-                        
+
                         string race = eCatalogue.getRace(cellChar);
                         if (damage == 0) {
                             actionEvent->setEvent(race + " has missed an attack.");
                         }else{
                             stringstream ss;
-                            ss << damage;
+                            ss >> damage;
                             string dmg;
-                            ss >> dmg;
-                            actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                            ss << dmg;
+                            actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                         }
-                        
+
                         player->setDamageHp(damage);
                         if(player->isSlain()){
                             actionEvent->addEvent("You have been slain.");
                         }
-                        
+
                         // Elf get two chances to attack, except on Drow
                         if ((cellChar == 'E') && (player->getRace() != "Drow")){
                             damage = enemyAttack(enemyAtk, playerDefence);
@@ -209,10 +214,10 @@ void Game::updateEnemy(){
                                 actionEvent->setEvent(race + " has missed an attack.");
                             }else{
                                 stringstream ss;
-                                ss << damage;
+                                ss >> damage;
                                 string dmg;
-                                ss >> dmg;
-                                actionEvent->setEvent(race + " deals " + to_string(damage) + " damage against you!");
+                                ss << dmg;
+                                actionEvent->setEvent(race + " deals " + dmg + " damage against you!");
                             }
                             player->setDamageHp(damage);
                             if(player->isSlain()){
@@ -240,7 +245,7 @@ void Game::notify(int mode, int direction) {
     int playerRow = playerCell->getRow();
     int playerCol = playerCell->getColumn();
     int checkRow = playerRow, checkCol = playerCol;
-    
+
     if (direction == 1 || direction == 2 || direction == 3) {
         checkRow--;
     }
@@ -253,9 +258,9 @@ void Game::notify(int mode, int direction) {
     if (direction == 3 || direction == 5 || direction == 8) {
         checkCol++;
     }
-    
+
     char check_char = cellGrid[checkRow][checkCol]->getCellChar();
-    
+
     if (mode == USE) {
         if (check_char == 'P') {
             GameObject* go = cellGrid[checkRow][checkCol]->getGameObject();
@@ -265,7 +270,7 @@ void Game::notify(int mode, int direction) {
         } else {
             actionEvent->setEvent("There is nothing here to use.");
         }
-    //To Do set merchWillAttack = true; if you attack a merchant
+        //To Do set merchWillAttack = true; if you attack a merchant
     } else if (mode == ATTACK) {
         actionEvent->setEvent("You attack.");
     } else if (mode == MOVE) {
@@ -288,6 +293,16 @@ void Game::notify(int mode, int direction) {
             playerCell->setRow(checkRow);
             playerCell->setColumn(checkCol);
             updateEnemy();
+        } else if (check_char == '\\') {
+            if (curFloor == 5) {
+                actionEvent->setEvent("You are freed from the dungeon.");
+                gamestate = MENU;
+            } else {
+                curFloor++;
+                clearMap();
+                load();
+                actionEvent->setEvent("Stepping down the staircase, you move deeper into the dungeon.");
+            }
         } else {
             actionEvent->setEvent("There is something blocking your path.");
         }
