@@ -33,6 +33,55 @@ bool EnemyCatalogue::isEnemy(char value){
     }
 }
 
+
+string EnemyCatalogue::getRace(char value){
+    string race = "";
+    switch (value) {
+        case 'H':
+        {
+            race = "Human";
+            break;
+        }
+        case 'W':
+        {
+            race = "Dwarf";
+            break;
+        }
+        case 'E':
+        {
+           race = "Elf";
+            break;
+        }
+        case 'O':
+        {
+            race = "Orc";
+            break;
+        }
+        case 'M':
+        {
+            race = "Merchant";
+            break;
+        }
+        case 'L':
+        {
+            race = "Halfling";
+            break;
+        }
+        case 'D':
+        {
+            race = "Dragon";
+            break;
+        }
+        default:
+        {
+            cout << "Error EnemyCatalogue:@getRace " << value << " not recognized" << endl;
+            break;
+        }
+    }
+    return race;
+}
+
+
 int EnemyCatalogue::getAtk(char value){
     switch (value) {
         case 'H':

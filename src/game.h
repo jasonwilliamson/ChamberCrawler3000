@@ -24,6 +24,8 @@ class Game {
     void setupCellBlockRadii();
     void updateEnemy();
     bool masterTurnFlag;
+    int enemyAttack(float enemyAtk, float playerDefence);
+    bool merchWillAttack;
 
   public:
     Game();

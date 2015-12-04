@@ -25,6 +25,7 @@ public:
     int getAtk(char);
     bool isEnemy(char);
     int getGoldDropped(char value);
+    string getRace(char value);
 };
 
 #endif 
